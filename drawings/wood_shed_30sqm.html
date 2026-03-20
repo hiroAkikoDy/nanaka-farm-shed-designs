@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ナナカファーム 農作業小屋 設計図</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#f9f7f2; --ink:#1a1a2e; --dim:#c0392b;
+  --leader:#1a6ba0; --border:#8b7d6b;
+  --wood:#8B6914; --wall-fill:#d4c5a0;
+  --struct-fill:#9b7a2e; --concrete:#b0b0b0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#3a3530;font-family:'Noto Sans JP',sans-serif;}
+
+/* A3横 @96dpi ≒ 1587×1123 → A3感覚で1400×990を使用 */
+.page{
+  width:1400px; height:990px;
+  background:var(--paper);
+  margin:24px auto;
+  box-shadow:0 6px 32px rgba(0,0,0,0.55);
+  display:flex; flex-direction:column;
+  border:2px solid #333;
+  overflow:hidden;
+}
+.frame-outer{border:5px solid var(--ink);margin:10px;flex:1;display:flex;flex-direction:column;}
+.frame-inner{border:2px solid var(--ink);margin:5px;flex:1;display:flex;flex-direction:column;}
+
+/* タイトルバー */
+.title-bar{border-bottom:2px solid var(--ink);display:flex;align-items:stretch;background:#fff;flex-shrink:0;}
+.title-main{padding:8px 18px;flex:1;border-right:1.5px solid var(--ink);}
+.title-main h2{font-size:1.3rem;font-weight:700;letter-spacing:3px;color:var(--ink);}
+.title-main .en{font-size:0.65rem;color:#777;letter-spacing:2px;margin-top:3px;}
+.title-meta{display:grid;grid-template-columns:repeat(4,auto);font-size:0.68rem;}
+.mc{padding:3px 14px;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;flex-direction:column;justify-content:center;}
+.mc:nth-child(n+5){border-bottom:none;}
+.ml{color:#999;font-size:0.58rem;}
+.mv{font-weight:600;}
+
+/* 図面エリア */
+.drawing-area{flex:1;display:flex;align-items:center;justify-content:center;padding:4px;overflow:hidden;}
+.drawing-area svg{max-width:100%;max-height:100%;}
+
+/* フッター */
+.footer{border-top:1.5px solid var(--ink);display:flex;font-size:0.62rem;color:#888;background:#fff;flex-shrink:0;}
+.fc{padding:3px 12px;border-right:1px solid #ccc;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: 完成予想図                                             -->
+<!-- ============================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>完成予想図　3Dパース</h2>
+    <div class="en">PERSPECTIVE RENDERING — NANAKA FARM AGRICULTURAL SHED</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">NF-SD-000</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">N.T.S.</div></div>
+    <div class="mc"><div class="ml">作成日</div><div class="mv">2026.03</div></div>
+    <div class="mc"><div class="ml">施主</div><div class="mv">七花ファーム</div></div>
+    <div class="mc"><div class="ml">建築面積</div><div class="mv">30.0 ㎡</div></div>
+    <div class="mc"><div class="ml">構造</div><div class="mv">木造軸組</div></div>
+    <div class="mc"><div class="ml">屋根形状</div><div class="mv">片流れ 1/10勾配</div></div>
+    <div class="mc"><div class="ml">所在地</div><div class="mv">熊本県</div></div>
+  </div>
+</div>
+
+<div class="drawing-area" style="background:#111827;">
+<svg viewBox="0 0 1340 860" xmlns="http://www.w3.org/2000/svg" width="1340" height="860">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#1e3a5f"/></linearGradient>
+  <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2d5a1e"/><stop offset="100%" stop-color="#1a3510"/></linearGradient>
+  <linearGradient id="ws" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ceb080"/><stop offset="100%" stop-color="#a88850"/></linearGradient>
+  <linearGradient id="we" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#b49060"/><stop offset="100%" stop-color="#8a7040"/></linearGradient>
+  <linearGradient id="rf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(210,245,225,0.88)"/><stop offset="100%" stop-color="rgba(160,210,185,0.72)"/></linearGradient>
+  <linearGradient id="bm" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b88030"/><stop offset="100%" stop-color="#8b6010"/></linearGradient>
+  <filter id="shd"><feDropShadow dx="5" dy="8" stdDeviation="5" flood-color="rgba(0,0,0,0.45)"/></filter>
+  <marker id="a1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7Z" fill="#e74c3c"/></marker>
+  <marker id="a2" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto"><path d="M7,0 L0,3.5 L7,7Z" fill="#e74c3c"/></marker>
+</defs>
+
+<!-- 背景・地面 -->
+<rect width="1340" height="860" fill="url(#sky)"/>
+<ellipse cx="670" cy="760" rx="640" ry="75" fill="url(#grd)" opacity="0.75"/>
+<line x1="0" y1="710" x2="1340" y2="710" stroke="#3a5a28" stroke-width="1.2" opacity="0.5"/>
+<!-- 影 -->
+<ellipse cx="660" cy="712" rx="290" ry="22" fill="rgba(0,0,0,0.32)"/>
+
+<!-- 束石 -->
+<rect x="278" y="648" width="24" height="15" fill="#909090" stroke="#555" stroke-width="0.8"/>
+<rect x="396" y="645" width="24" height="15" fill="#909090" stroke="#555" stroke-width="0.8"/>
+<rect x="514" y="642" width="24" height="15" fill="#909090" stroke="#555" stroke-width="0.8"/>
+<rect x="632" y="639" width="24" height="15" fill="#909090" stroke="#555" stroke-width="0.8"/>
+<rect x="750" y="636" width="24" height="15" fill="#909090" stroke="#555" stroke-width="0.8"/>
+<!-- 土台 -->
+<rect x="275" y="640" width="508" height="10" fill="#8B6914" stroke="#5a4010" stroke-width="0.9"/>
+<!-- 土台側面 -->
+<polygon points="275,640 255,625 255,615 275,630" fill="#7a5c10" stroke="#5a4010" stroke-width="0.7"/>
+
+<!-- 壁（南面）フィルタ影 -->
+<g filter="url(#shd)">
+  <!-- P-A左 -->
+  <rect x="275" y="368" width="118" height="272" fill="url(#ws)" stroke="#8a7040" stroke-width="1.2"/>
+  <line x1="300" y1="368" x2="300" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+  <line x1="325" y1="368" x2="325" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+  <line x1="350" y1="368" x2="350" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+  <line x1="375" y1="368" x2="375" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+  <!-- P-B左（換気窓付き）-->
+  <rect x="393" y="368" width="118" height="272" fill="url(#ws)" stroke="#8a7040" stroke-width="1.2"/>
+  <rect x="412" y="470" width="75" height="75" fill="rgba(160,210,230,0.5)" stroke="#4a90c0" stroke-width="1.5"/>
+  <line x1="449" y1="470" x2="449" y2="545" stroke="#4a90c0" stroke-width="0.9"/>
+  <line x1="412" y1="507" x2="487" y2="507" stroke="#4a90c0" stroke-width="0.9"/>
+  <!-- 引き戸上枠 -->
+  <rect x="511" y="368" width="138" height="74" fill="url(#ws)" stroke="#8a7040" stroke-width="1.2"/>
+  <!-- 引き戸ガラス左 -->
+  <rect x="511" y="442" width="66" height="198" fill="rgba(160,220,240,0.42)" stroke="#5090ba" stroke-width="1.5"/>
+  <line x1="544" y1="442" x2="544" y2="640" stroke="#5090ba" stroke-width="0.9"/>
+  <!-- 引き戸ガラス右 -->
+  <rect x="581" y="442" width="68" height="198" fill="rgba(140,205,225,0.36)" stroke="#5090ba" stroke-width="1.5"/>
+  <line x1="615" y1="442" x2="615" y2="640" stroke="#5090ba" stroke-width="0.9"/>
+  <!-- 引き戸枠 -->
+  <rect x="511" y="368" width="138" height="272" fill="none" stroke="#4a90c0" stroke-width="2.2"/>
+  <line x1="580" y1="368" x2="580" y2="640" stroke="#aaa" stroke-width="1.8"/>
+  <!-- P-B右（換気窓付き）-->
+  <rect x="649" y="368" width="118" height="272" fill="url(#ws)" stroke="#8a7040" stroke-width="1.2"/>
+  <rect x="668" y="470" width="75" height="75" fill="rgba(160,210,230,0.5)" stroke="#4a90c0" stroke-width="1.5"/>
+  <line x1="705" y1="470" x2="705" y2="545" stroke="#4a90c0" stroke-width="0.9"/>
+  <line x1="668" y1="507" x2="743" y2="507" stroke="#4a90c0" stroke-width="0.9"/>
+  <!-- P-A右 -->
+  <rect x="767" y="368" width="116" height="272" fill="url(#ws)" stroke="#8a7040" stroke-width="1.2"/>
+  <line x1="792" y1="368" x2="792" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+  <line x1="817" y1="368" x2="817" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+  <line x1="842" y1="368" x2="842" y2="640" stroke="#b09050" stroke-width="0.5" opacity="0.6"/>
+</g>
+
+<!-- 東面壁（側面）-->
+<polygon points="883,368 965,322 965,600 883,640" fill="url(#we)" stroke="#8a7040" stroke-width="1.2"/>
+<line x1="897" y1="368" x2="979" y2="322" stroke="#b09050" stroke-width="0.5" opacity="0.4"/>
+<line x1="911" y1="368" x2="993" y2="322" stroke="#b09050" stroke-width="0.5" opacity="0.4" transform="translate(-14,36)"/>
+<line x1="925" y1="368" x2="1007" y2="322" stroke="#b09050" stroke-width="0.5" opacity="0.4" transform="translate(-28,72)"/>
+
+<!-- 南側軒桁 -->
+<rect x="275" y="352" width="608" height="17" fill="url(#bm)" stroke="#5a4010" stroke-width="1.2"/>
+<!-- 東側軒桁 -->
+<polygon points="883,352 965,306 965,323 883,369" fill="#9a7020" stroke="#5a4010" stroke-width="0.9"/>
+
+<!-- 垂木（断面が前面に見える）-->
+<line x1="280" y1="343" x2="263" y2="332" stroke="#a07830" stroke-width="4"/>
+<line x1="397" y1="340" x2="380" y2="329" stroke="#a07830" stroke-width="4"/>
+<line x1="514" y1="337" x2="497" y2="326" stroke="#a07830" stroke-width="4"/>
+<line x1="631" y1="334" x2="614" y2="323" stroke="#a07830" stroke-width="4"/>
+<line x1="748" y1="331" x2="731" y2="320" stroke="#a07830" stroke-width="4"/>
+<line x1="865" y1="328" x2="848" y2="317" stroke="#a07830" stroke-width="4"/>
+<line x1="965" y1="305" x2="948" y2="294" stroke="#a07830" stroke-width="4"/>
+
+<!-- 野地板 -->
+<polygon points="258,344 978,298 978,310 258,356" fill="#d4b870" opacity="0.65" stroke="#b09040" stroke-width="1"/>
+<!-- ポリカ屋根 -->
+<polygon points="248,333 978,285 978,298 248,346" fill="url(#rf)" stroke="#5aaa80" stroke-width="1.8"/>
+<line x1="260" y1="340" x2="975" y2="292" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+
+<!-- 柱（前面） -->
+<rect x="272" y="368" width="8" height="272" fill="#a07830" stroke="#7a5010" stroke-width="0.6" opacity="0.6"/>
+<rect x="879" y="368" width="8" height="272" fill="#a07830" stroke="#7a5010" stroke-width="0.6" opacity="0.6"/>
+
+<!-- ===== ラベル（左側）===== -->
+<text x="200" y="332" text-anchor="end" fill="#90d4a8" font-size="13" font-family="'Share Tech Mono',monospace">ポリカ波板 t8</text>
+<line x1="202" y1="330" x2="250" y2="336" stroke="#90d4a8" stroke-width="0.9"/>
+<text x="200" y="348" text-anchor="end" fill="#d4b870" font-size="13" font-family="'Share Tech Mono',monospace">野地板 t12</text>
+<line x1="202" y1="346" x2="260" y2="349" stroke="#d4b870" stroke-width="0.9"/>
+<text x="200" y="363" text-anchor="end" fill="#c09040" font-size="13" font-family="'Share Tech Mono',monospace">軒桁 105×150</text>
+<line x1="202" y1="361" x2="277" y2="360" stroke="#c09040" stroke-width="0.9"/>
+<text x="200" y="378" text-anchor="end" fill="#c09040" font-size="13" font-family="'Share Tech Mono',monospace">垂木 45×105@1000</text>
+
+<text x="200" y="490" text-anchor="end" fill="#c8b080" font-size="13" font-family="'Share Tech Mono',monospace">壁パネル t120</text>
+<line x1="202" y1="488" x2="277" y2="500" stroke="#c8b080" stroke-width="0.9"/>
+<text x="200" y="508" text-anchor="end" fill="#7ab8d8" font-size="13" font-family="'Share Tech Mono',monospace">換気窓 600×600</text>
+<line x1="202" y1="506" x2="412" y2="507" stroke="#7ab8d8" stroke-width="0.9"/>
+<text x="200" y="526" text-anchor="end" fill="#7ab8d8" font-size="13" font-family="'Share Tech Mono',monospace">引き戸 1800×2100</text>
+<line x1="202" y1="524" x2="511" y2="490" stroke="#7ab8d8" stroke-width="0.9"/>
+
+<text x="200" y="638" text-anchor="end" fill="#c0a870" font-size="13" font-family="'Share Tech Mono',monospace">土台 105×105</text>
+<line x1="202" y1="636" x2="277" y2="643" stroke="#c0a870" stroke-width="0.9"/>
+<text x="200" y="654" text-anchor="end" fill="#909090" font-size="13" font-family="'Share Tech Mono',monospace">束石 200×200×150</text>
+<line x1="202" y1="652" x2="278" y2="653" stroke="#909090" stroke-width="0.9"/>
+
+<!-- 右側ラベル -->
+<text x="985" y="310" fill="#c09040" font-size="13" font-family="'Share Tech Mono',monospace">北側軒高 H=2,500</text>
+<text x="985" y="375" fill="#c8b080" font-size="13" font-family="'Share Tech Mono',monospace">東面壁パネル</text>
+
+<!-- 南側高さ注釈 -->
+<line x1="895" y1="368" x2="895" y2="640" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="910" y="510" fill="#e74c3c" font-size="13" font-family="'Share Tech Mono',monospace">H=3,000</text>
+<text x="910" y="526" fill="#e74c3c" font-size="12" font-family="'Noto Sans JP',sans-serif">（南側軒高）</text>
+
+<!-- 全幅寸法 -->
+<line x1="275" y1="678" x2="883" y2="678" stroke="#e74c3c" stroke-width="1.2" marker-end="url(#a1)" marker-start="url(#a2)"/>
+<text x="579" y="672" text-anchor="middle" fill="#e74c3c" font-size="16" font-family="'Share Tech Mono',monospace" font-weight="bold">6,000 mm</text>
+<line x1="275" y1="640" x2="275" y2="684" stroke="#e74c3c" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="883" y1="640" x2="883" y2="684" stroke="#e74c3c" stroke-width="0.7" stroke-dasharray="3,2"/>
+
+<!-- タイトル -->
+<text x="670" y="42" text-anchor="middle" fill="white" font-size="22" font-family="'Noto Sans JP',sans-serif" font-weight="700" letter-spacing="5">ナナカファーム　農作業小屋　完成予想図</text>
+<text x="670" y="66" text-anchor="middle" fill="#8888bb" font-size="13" font-family="'Share Tech Mono',monospace">NANAKA FARM — AGRICULTURAL SHED  ·  6,000 × 5,000 mm  ·  木造軸組 片流れ屋根 1/10勾配</text>
+
+<!-- スペック表（右下） -->
+<rect x="1020" y="440" width="290" height="220" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+<text x="1165" y="460" text-anchor="middle" fill="#aaaacc" font-size="11" font-family="'Noto Sans JP',sans-serif" font-weight="700">建物概要</text>
+<line x1="1025" y1="465" x2="1305" y2="465" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+<text x="1035" y="485" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">構造   木造軸組（パネル工法）</text>
+<text x="1035" y="503" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">面積   30.0 ㎡（6,000×5,000）</text>
+<text x="1035" y="521" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">軒高   南3,000 / 北2,500 mm</text>
+<text x="1035" y="539" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">基礎   束石 200×200×150</text>
+<text x="1035" y="557" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">屋根   片流れ 1/10勾配 ポリカ</text>
+<text x="1035" y="575" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">建具   引き戸 1800×2100（南面）</text>
+<text x="1035" y="593" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">換気   600×600窓 ×2ヶ所</text>
+<text x="1035" y="611" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">柱     105×105 @1500ピッチ</text>
+<text x="1035" y="629" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">垂木   45×105 @1000ピッチ</text>
+<text x="1035" y="647" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">外壁   杉板張り t120</text>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">農作業小屋 設計図</div>
+  <div class="fc">図面番号: NF-SD-000</div>
+  <div class="fc">完成予想図（3Dパース）</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 1 / 4</div>
+</div>
+</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PAGE 2: 正面図（南面）                                         -->
+<!-- ============================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>正面図（南面）</h2>
+    <div class="en">FRONT ELEVATION — SOUTH FACE  |  縮尺 1:50  ·  単位: mm</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">NF-SD-001</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">1:50</div></div>
+    <div class="mc"><div class="ml">全幅</div><div class="mv">6,000 mm</div></div>
+    <div class="mc"><div class="ml">壁高さ</div><div class="mv">3,000 mm</div></div>
+    <div class="mc"><div class="ml">柱本数</div><div class="mv">5本（南列）</div></div>
+    <div class="mc"><div class="ml">柱ピッチ</div><div class="mv">1,500 mm</div></div>
+    <div class="mc"><div class="ml">引き戸</div><div class="mv">1800×2100</div></div>
+    <div class="mc"><div class="ml">換気窓</div><div class="mv">600×600 ×2</div></div>
+  </div>
+</div>
+
+<div class="drawing-area">
+<svg viewBox="-260 -120 1350 820" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g1" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0 L0,0 0,30" fill="none" stroke="#e8e0d0" stroke-width="0.4"/></pattern>
+  <marker id="fa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="#c0392b"/></marker>
+  <marker id="fb" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8Z" fill="#c0392b"/></marker>
+  <marker id="fl" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6Z" fill="#1a6ba0"/></marker>
+</defs>
+
+<!-- グリッド・背景 -->
+<rect x="-30" y="-80" width="760" height="700" fill="url(#g1)"/>
+
+<!-- 軸線 -->
+<line x1="5"   y1="-100" x2="5"   y2="560" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="155" y1="-100" x2="155" y2="560" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="305" y1="-100" x2="305" y2="560" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="455" y1="-100" x2="455" y2="560" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="605" y1="-100" x2="605" y2="560" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<!-- 軸番号 -->
+<circle cx="5"   cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="5"   y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X1</text>
+<circle cx="155" cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="155" y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X2</text>
+<circle cx="305" cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="305" y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X3</text>
+<circle cx="455" cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="455" y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X4</text>
+<circle cx="605" cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="605" y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X5</text>
+
+<!-- GL・地面 -->
+<rect x="-30" y="450" width="760" height="20" fill="#c5b896" stroke="#7a6040" stroke-width="1.5"/>
+<line x1="-30" y1="450" x2="730" y2="450" stroke="#333" stroke-width="1.8"/>
+<text x="-35" y="453" text-anchor="end" font-size="11" fill="#333" font-family="'Share Tech Mono',monospace">GL</text>
+<!-- 地面ハッチング -->
+<line x1="-30" y1="455" x2="730" y2="455" stroke="#9a8060" stroke-width="0.5"/>
+<line x1="-30" y1="461" x2="730" y2="461" stroke="#9a8060" stroke-width="0.5"/>
+<line x1="-30" y1="467" x2="730" y2="467" stroke="#9a8060" stroke-width="0.5"/>
+
+<!-- 束石 200×150 → 22×15unit -->
+<rect x="-5"  y="435" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<rect x="145" y="435" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<rect x="295" y="435" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<rect x="445" y="435" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<rect x="595" y="435" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<text x="6" y="433" text-anchor="middle" font-size="8" fill="#555">束石</text>
+
+<!-- 土台 105mm → 11unit -->
+<rect x="0"   y="424" width="660" height="11" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<!-- 土台GL線 -->
+<line x1="-30" y1="424" x2="0" y2="424" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 壁パネル 高さ300unit=3000mm -->
+<rect x="0"   y="124" width="150" height="300" fill="#d4c5a0" stroke="#7a6040" stroke-width="1.2"/>
+<rect x="150" y="124" width="150" height="300" fill="#d4c5a0" stroke="#7a6040" stroke-width="1.2"/>
+<!-- 引き戸上枠 2100mm=210unit → 開口下端: y=124+90=214 引き戸上端 -->
+<!-- 引き戸高さ2100→210unit → 底y=424, top=424-210=214 -->
+<rect x="210" y="124" width="180" height="90"  fill="#d4c5a0" stroke="#7a6040" stroke-width="1.2"/>
+<rect x="390" y="124" width="120" height="300" fill="#d4c5a0" stroke="#7a6040" stroke-width="1.2"/>
+<rect x="510" y="124" width="150" height="300" fill="#d4c5a0" stroke="#7a6040" stroke-width="1.2"/>
+
+<!-- 換気窓 600×600→60×60 南面P-B（高さ1500mm基準→中心H=1800mm→y=424-180=244） -->
+<rect x="168" y="274" width="65" height="65" fill="rgba(160,210,230,0.55)" stroke="#4a90c0" stroke-width="1.5"/>
+<line x1="200" y1="274" x2="200" y2="339" stroke="#4a90c0" stroke-width="0.9"/>
+<line x1="168" y1="306" x2="233" y2="306" stroke="#4a90c0" stroke-width="0.9"/>
+<rect x="398" y="274" width="65" height="65" fill="rgba(160,210,230,0.55)" stroke="#4a90c0" stroke-width="1.5"/>
+<line x1="430" y1="274" x2="430" y2="339" stroke="#4a90c0" stroke-width="0.9"/>
+<line x1="398" y1="306" x2="463" y2="306" stroke="#4a90c0" stroke-width="0.9"/>
+
+<!-- 引き戸ガラス (y=214〜424) -->
+<rect x="210" y="214" width="88" height="210" fill="rgba(160,210,235,0.42)" stroke="#5090ba" stroke-width="1.2"/>
+<rect x="302" y="214" width="88" height="210" fill="rgba(140,200,225,0.36)" stroke="#5090ba" stroke-width="1.2"/>
+<!-- 引き戸枠 -->
+<rect x="210" y="124" width="180" height="300" fill="none" stroke="#4a90c0" stroke-width="2.2"/>
+<line x1="300" y1="124" x2="300" y2="424" stroke="#5090c0" stroke-width="1.8"/>
+<line x1="210" y1="214" x2="390" y2="214" stroke="#5090c0" stroke-width="1.5"/>
+
+<!-- 柱 11×300 -->
+<rect x="0"   y="124" width="11" height="300" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<rect x="149" y="124" width="11" height="300" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<rect x="299" y="124" width="11" height="300" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<rect x="449" y="124" width="11" height="300" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<rect x="599" y="124" width="11" height="300" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+
+<!-- 軒桁 105×150→11×15 -->
+<rect x="-30" y="109" width="720" height="16" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<!-- 垂木断面（細い帯）-->
+<rect x="-30" y="101" width="720" height="8"  fill="#a07828" stroke="none" opacity="0.9"/>
+<!-- 野地板 -->
+<rect x="-30" y="95"  width="720" height="6"  fill="#c8a870" stroke="#a08850" stroke-width="0.6"/>
+<!-- ポリカ -->
+<rect x="-30" y="87"  width="720" height="8"  fill="rgba(180,225,200,0.72)" stroke="#5aaa80" stroke-width="1.2"/>
+
+<!-- 中心線（引き戸） -->
+<line x1="300" y1="-20" x2="300" y2="430" stroke="#aaaacc" stroke-width="0.5" stroke-dasharray="10,4,2,4"/>
+
+<!-- ====== 寸法線 ====== -->
+<!-- 全幅 6000 -->
+<line x1="0" y1="530" x2="660" y2="530" stroke="#c0392b" stroke-width="1.2" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="330" y="524" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="16">6,000</text>
+<line x1="0"   y1="424" x2="0"   y2="537" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="660" y1="424" x2="660" y2="537" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+
+<!-- 柱ピッチ 1500×4 -->
+<line x1="0"   y1="500" x2="150" y2="500" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="75"  y="495" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">1,500</text>
+<line x1="150" y1="500" x2="300" y2="500" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="225" y="495" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">1,500</text>
+<line x1="300" y1="500" x2="450" y2="500" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="375" y="495" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">1,500</text>
+<line x1="450" y1="500" x2="600" y2="500" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="525" y="495" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">1,500</text>
+<line x1="0"   y1="485" x2="0"   y2="505" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="150" y1="485" x2="150" y2="505" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="300" y1="485" x2="300" y2="505" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="450" y1="485" x2="450" y2="505" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="600" y1="485" x2="600" y2="505" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+
+<!-- 引き戸幅 1800 -->
+<line x1="210" y1="565" x2="390" y2="565" stroke="#c0392b" stroke-width="1.1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="300" y="559" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">1,800（引き戸）</text>
+<line x1="210" y1="424" x2="210" y2="572" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="390" y1="424" x2="390" y2="572" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+
+<!-- 軒出 300 (左) -->
+<line x1="0" y1="555" x2="-30" y2="555" stroke="#c0392b" stroke-width="0.9" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="-15" y="550" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="10">300</text>
+<text x="-15" y="561" text-anchor="middle" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="8">軒出</text>
+<line x1="-30" y1="450" x2="-30" y2="560" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 壁高さ 3000 (右側) -->
+<line x1="720" y1="124" x2="720" y2="424" stroke="#c0392b" stroke-width="1.2" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="738" y="280" text-anchor="start" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="16">3,000</text>
+<text x="738" y="296" text-anchor="start" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="11">（南側壁高）</text>
+<line x1="660" y1="124" x2="726" y2="124" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="660" y1="424" x2="726" y2="424" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+
+<!-- 引き戸高さ 2100 (左側) -->
+<line x1="-70" y1="214" x2="-70" y2="424" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="-85" y="324" text-anchor="end" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="13">2,100</text>
+<line x1="0"   y1="214" x2="-76" y2="214" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+
+<!-- 基礎高さ 255 -->
+<line x1="720" y1="424" x2="720" y2="450" stroke="#c0392b" stroke-width="0.9" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="730" y="440" text-anchor="start" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="10">255</text>
+<text x="730" y="452" text-anchor="start" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="8">基礎高</text>
+
+<!-- 換気窓寸法 -->
+<line x1="152" y1="274" x2="152" y2="339" stroke="#c0392b" stroke-width="0.8" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="145" y="310" text-anchor="end" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="10">600</text>
+<line x1="168" y1="262" x2="233" y2="262" stroke="#c0392b" stroke-width="0.8" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="200" y="257" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="10">600</text>
+
+<!-- 部材ラベル -->
+<text x="-220" y="90"  fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">ポリカ波板 t8（半透明）</text>
+<line x1="-30" y1="91"  x2="-100" y2="91"  stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+<text x="-220" y="104" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">野地板 t12</text>
+<line x1="-30" y1="98"  x2="-100" y2="104" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+<text x="-220" y="118" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">垂木 45×105 @1000</text>
+<line x1="-30" y1="105" x2="-100" y2="116" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+<text x="-220" y="133" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">南側軒桁 105×150</text>
+<line x1="-30" y1="117" x2="-100" y2="130" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+
+<text x="-220" y="195" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">柱 105×105</text>
+<line x1="0"   y1="195" x2="-100" y2="195" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+
+<text x="-220" y="295" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">換気窓 600×600</text>
+<line x1="168" y1="306" x2="-100" y2="292" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+
+<text x="-220" y="380" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">壁パネル P-A（無開口）</text>
+<line x1="0"   y1="374" x2="-100" y2="378" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+
+<text x="-220" y="428" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">土台 105×105</text>
+<line x1="0"   y1="428" x2="-100" y2="428" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+<text x="-220" y="443" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">束石 200×200×150</text>
+<line x1="-5"  y1="443" x2="-100" y2="443" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="4,2" marker-end="url(#fl)"/>
+
+<!-- 右側ラベル -->
+<text x="760" y="380" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">壁パネル P-B</text>
+<text x="760" y="393" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">（換気窓付き）</text>
+<text x="300" y="172" text-anchor="middle" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="12">引き戸 W1800×H2100</text>
+<text x="300" y="186" text-anchor="middle" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="10">アルミサッシ＋半透明ガラス</text>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">農作業小屋 設計図</div>
+  <div class="fc">図面番号: NF-SD-001</div>
+  <div class="fc">正面図（南面）　縮尺 1:50　単位 mm</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 2 / 4</div>
+</div>
+</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PAGE 3: 側面図（西面）                                         -->
+<!-- ============================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>側面図（西面）</h2>
+    <div class="en">SIDE ELEVATION — WEST FACE  |  縮尺 1:50  ·  単位: mm</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">NF-SD-002</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">1:50</div></div>
+    <div class="mc"><div class="ml">南側軒高</div><div class="mv">3,000 mm</div></div>
+    <div class="mc"><div class="ml">北側軒高</div><div class="mv">2,500 mm</div></div>
+    <div class="mc"><div class="ml">高低差</div><div class="mv">500 mm</div></div>
+    <div class="mc"><div class="ml">奥行き</div><div class="mv">5,000 mm</div></div>
+    <div class="mc"><div class="ml">屋根勾配</div><div class="mv">1/10（5.7°）</div></div>
+    <div class="mc"><div class="ml">軒出</div><div class="mv">300 mm（四方）</div></div>
+  </div>
+</div>
+
+<div class="drawing-area">
+<!-- viewBox: 左余白350px（ラベル用）右余白350px（寸法用）上下余白各130px -->
+<!-- 建物本体: X=0〜500, Y=120〜420（3000mm高）, 北側 Y=170〜420（2500mm高）-->
+<svg viewBox="-350 -130 1300 790" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g2" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0 L0,0 0,30" fill="none" stroke="#e8e0d0" stroke-width="0.4"/></pattern>
+  <marker id="sa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="#c0392b"/></marker>
+  <marker id="sb" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8Z" fill="#c0392b"/></marker>
+  <marker id="sl" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6Z" fill="#1a6ba0"/></marker>
+</defs>
+
+<!-- グリッド -->
+<rect x="-30" y="-100" width="580" height="660" fill="url(#g2)"/>
+
+<!-- 軸線 Y方向 -->
+<line x1="5"   y1="-110" x2="5"   y2="590" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="255" y1="-110" x2="255" y2="590" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="505" y1="-110" x2="505" y2="590" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<!-- 軸番号 -->
+<circle cx="5"   cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="5"   y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y1</text>
+<circle cx="255" cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="255" y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y2</text>
+<circle cx="505" cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="505" y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y3</text>
+<!-- 方向ラベル -->
+<text x="5"   y="-125" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">南(S)</text>
+<text x="505" y="-125" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">北(N)</text>
+
+<!-- GL・地面 -->
+<rect x="-30" y="445" width="580" height="18" fill="#c5b896" stroke="#7a6040" stroke-width="1.5"/>
+<line x1="-30" y1="445" x2="550" y2="445" stroke="#333" stroke-width="1.8"/>
+<text x="-35" y="448" text-anchor="end" font-size="11" fill="#333" font-family="'Share Tech Mono',monospace">GL</text>
+<line x1="-30" y1="451" x2="550" y2="451" stroke="#9a8060" stroke-width="0.5"/>
+<line x1="-30" y1="457" x2="550" y2="457" stroke="#9a8060" stroke-width="0.5"/>
+<line x1="-30" y1="463" x2="550" y2="463" stroke="#9a8060" stroke-width="0.5"/>
+
+<!-- 束石（3個: Y=0,250,500） -->
+<rect x="-5"  y="430" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<rect x="245" y="430" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+<rect x="495" y="430" width="22" height="15" fill="#b0b0b0" stroke="#666" stroke-width="1"/>
+
+<!-- 土台 -->
+<rect x="0" y="420" width="500" height="11" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+
+<!-- 壁本体（片流れ台形）南端y=120, 北端y=170, 底y=420 -->
+<polygon points="0,120 500,170 500,420 0,420" fill="#d4c5a0" stroke="#7a6040" stroke-width="1.8"/>
+<!-- 壁板目地（横） -->
+<line x1="0" y1="220" x2="500" y2="223" stroke="#b8a080" stroke-width="0.6" opacity="0.7"/>
+<line x1="0" y1="270" x2="500" y2="273" stroke="#b8a080" stroke-width="0.6" opacity="0.7"/>
+<line x1="0" y1="320" x2="500" y2="323" stroke="#b8a080" stroke-width="0.6" opacity="0.7"/>
+<line x1="0" y1="370" x2="500" y2="373" stroke="#b8a080" stroke-width="0.6" opacity="0.7"/>
+
+<!-- 柱（3本見える）-->
+<rect x="0"   y="120" width="11" height="300" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<rect x="244" y="145" width="11" height="275" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<rect x="494" y="170" width="11" height="250" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+
+<!-- 南側桁（Y=0側、高い） -->
+<rect x="-30" y="105" width="16" height="16" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<!-- 北側桁（Y=500側、低い） -->
+<rect x="516" y="155" width="16" height="16" fill="#9b7a2e" stroke="#5a4010" stroke-width="1"/>
+<!-- 桁の通し線（傾斜） -->
+<line x1="-30" y1="105" x2="532" y2="155" stroke="#8B6914" stroke-width="3"/>
+<line x1="-30" y1="121" x2="532" y2="171" stroke="#8B6914" stroke-width="3"/>
+
+<!-- 垂木断面（7個）-->
+<rect x="-30" y="93"  width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="38"  y="90"  width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="122" y="87"  width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="207" y="105" width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="291" y="112" width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="375" y="120" width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="460" y="127" width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+<rect x="530" y="137" width="8" height="12" fill="#9b7a2e" stroke="#5a4010" stroke-width="0.8"/>
+
+<!-- 野地板（傾斜面） -->
+<polygon points="-30,105 532,155 532,162 -30,112" fill="#c8a870" stroke="#a08850" stroke-width="0.8"/>
+<!-- ポリカ波板 -->
+<polygon points="-30,92 532,142 532,155 -30,105" fill="rgba(180,225,200,0.68)" stroke="#5aaa80" stroke-width="1.8"/>
+<!-- ポリカ縞（波板表現）-->
+<line x1="-20" y1="97"  x2="522" y2="147" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+<line x1="-20" y1="100" x2="522" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+
+<!-- 中間土台（Y=2500位置の横材）-->
+<line x1="0" y1="295" x2="500" y2="297" stroke="#8B6914" stroke-width="2" stroke-dasharray="8,4" opacity="0.8"/>
+<text x="250" y="292" text-anchor="middle" fill="#8B6914" font-family="'Noto Sans JP',sans-serif" font-size="10">中間土台（Y=2,500）</text>
+
+<!-- ====== 寸法線 ====== -->
+<!-- 全奥行き 5000mm -->
+<line x1="0" y1="530" x2="500" y2="530" stroke="#c0392b" stroke-width="1.2" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="250" y="524" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="16">5,000</text>
+<line x1="0"   y1="445" x2="0"   y2="537" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="500" y1="445" x2="500" y2="537" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+
+<!-- Y=2500位置 -->
+<line x1="0" y1="500" x2="255" y2="500" stroke="#c0392b" stroke-width="1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="127" y="495" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">2,500</text>
+<line x1="255" y1="445" x2="255" y2="505" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 南側軒高 3000（左側） -->
+<line x1="-170" y1="120" x2="-170" y2="420" stroke="#c0392b" stroke-width="1.3" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="-186" y="275" text-anchor="end" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="16">3,000</text>
+<text x="-186" y="292" text-anchor="end" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="11">南側軒高</text>
+<line x1="0"    y1="120" x2="-176" y2="120" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="0"    y1="420" x2="-176" y2="420" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+
+<!-- 北側軒高 2500（右側） -->
+<line x1="680" y1="170" x2="680" y2="420" stroke="#c0392b" stroke-width="1.3" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="696" y="300" text-anchor="start" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="16">2,500</text>
+<text x="696" y="317" text-anchor="start" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="11">北側軒高</text>
+<line x1="500" y1="170" x2="686" y2="170" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="500" y1="420" x2="686" y2="420" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+
+<!-- 高低差 500 -->
+<line x1="600" y1="120" x2="600" y2="170" stroke="#c0392b" stroke-width="1.1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="616" y="148" text-anchor="start" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="14">500</text>
+<line x1="0"   y1="120" x2="606" y2="120" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="3,2"/>
+<line x1="500" y1="170" x2="606" y2="170" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="3,2"/>
+
+<!-- 基礎高さ 255 -->
+<line x1="-170" y1="420" x2="-170" y2="445" stroke="#c0392b" stroke-width="1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="-186" y="435" text-anchor="end" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">255</text>
+<text x="-186" y="448" text-anchor="end" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="10">基礎高さ</text>
+
+<!-- 軒出 南側 300 -->
+<line x1="0" y1="562" x2="-30" y2="562" stroke="#c0392b" stroke-width="1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="-15" y="557" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="11">300</text>
+<text x="-15" y="570" text-anchor="middle" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="9">軒出</text>
+<line x1="-30" y1="445" x2="-30" y2="568" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 軒出 北側 300 -->
+<line x1="500" y1="562" x2="530" y2="562" stroke="#c0392b" stroke-width="1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="515" y="557" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="11">300</text>
+<text x="515" y="570" text-anchor="middle" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="9">軒出</text>
+<line x1="530" y1="445" x2="530" y2="568" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 屋根勾配記号 -->
+<polygon points="380,82 430,82 380,100" fill="none" stroke="#c0392b" stroke-width="1.2"/>
+<text x="390" y="80" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="10">1</text>
+<text x="380" y="106" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="10">10</text>
+<text x="440" y="89" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="12">勾配 1/10（5.7°）</text>
+
+<!-- ====== 部材ラベル（左側）====== -->
+<text x="-310" y="95"  fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">ポリカ波板 t8</text>
+<line x1="-30" y1="98"  x2="-160" y2="94"  stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+<text x="-310" y="110" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">野地板 t12</text>
+<line x1="-30" y1="108" x2="-160" y2="108" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+<text x="-310" y="125" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">垂木 45×105 @1000</text>
+<line x1="-30" y1="99"  x2="-160" y2="122" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+<text x="-310" y="140" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">南側軒桁 105×150</text>
+<line x1="-30" y1="113" x2="-160" y2="137" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+
+<text x="-310" y="195" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">柱 105×105</text>
+<line x1="0"   y1="195" x2="-160" y2="195" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+
+<text x="-310" y="310" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">壁パネル t120</text>
+<line x1="0"   y1="310" x2="-160" y2="310" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+
+<text x="-310" y="421" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">土台 105×105（防腐処理）</text>
+<line x1="0"   y1="424" x2="-160" y2="422" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+<text x="-310" y="437" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">束石 200×200×150</text>
+<line x1="-5"  y1="437" x2="-160" y2="437" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+
+<!-- 右側ラベル -->
+<text x="700" y="157" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="13">北側軒桁 105×150</text>
+<line x1="532" y1="163" x2="698" y2="154" stroke="#1a6ba0" stroke-width="0.9" stroke-dasharray="5,2" marker-end="url(#sl)"/>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">農作業小屋 設計図</div>
+  <div class="fc">図面番号: NF-SD-002</div>
+  <div class="fc">側面図（西面）　縮尺 1:50　単位 mm</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 3 / 4</div>
+</div>
+</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PAGE 4: 平面図                                                -->
+<!-- ============================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>平面図（GL + 1,200）</h2>
+    <div class="en">FLOOR PLAN — LEVEL GL+1200  |  縮尺 1:50  ·  単位: mm</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">NF-SD-003</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">1:50</div></div>
+    <div class="mc"><div class="ml">全幅</div><div class="mv">6,000 mm</div></div>
+    <div class="mc"><div class="ml">全奥行</div><div class="mv">5,000 mm</div></div>
+    <div class="mc"><div class="ml">建築面積</div><div class="mv">30.0 ㎡</div></div>
+    <div class="mc"><div class="ml">柱本数</div><div class="mv">12本</div></div>
+    <div class="mc"><div class="ml">柱ピッチ</div><div class="mv">X:1500 / Y:2500</div></div>
+    <div class="mc"><div class="ml">壁厚</div><div class="mv">120 mm</div></div>
+  </div>
+</div>
+
+<div class="drawing-area">
+<svg viewBox="-240 -140 1280 920" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g3" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0 L0,0 0,30" fill="none" stroke="#e8e0d0" stroke-width="0.4"/></pattern>
+  <marker id="pa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="#c0392b"/></marker>
+  <marker id="pb" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8Z" fill="#c0392b"/></marker>
+  <marker id="pl" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6Z" fill="#1a6ba0"/></marker>
+</defs>
+
+<!-- グリッド -->
+<rect x="-30" y="-30" width="720" height="560" fill="url(#g3)"/>
+
+<!-- 軸線 X -->
+<line x1="5"   y1="-120" x2="5"   y2="550" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="155" y1="-120" x2="155" y2="550" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="305" y1="-120" x2="305" y2="550" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="455" y1="-120" x2="455" y2="550" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="605" y1="-120" x2="605" y2="550" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<!-- 軸線 Y -->
+<line x1="-30" y1="5"   x2="710" y2="5"   stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="-30" y1="255" x2="710" y2="255" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<line x1="-30" y1="505" x2="710" y2="505" stroke="#c8c0b8" stroke-width="0.6" stroke-dasharray="10,5,2,5"/>
+<!-- 軸番号 上部 -->
+<circle cx="5"   cy="-120" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="5"   y="-116" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X1</text>
+<circle cx="155" cy="-120" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="155" y="-116" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X2</text>
+<circle cx="305" cy="-120" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="305" y="-116" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X3</text>
+<circle cx="455" cy="-120" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="455" y="-116" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X4</text>
+<circle cx="605" cy="-120" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="605" y="-116" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X5</text>
+<!-- 軸番号 左部 -->
+<circle cx="-200" cy="5"   r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="-200" y="9"   text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y1</text>
+<circle cx="-200" cy="255" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="-200" y="259" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y2</text>
+<circle cx="-200" cy="505" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="-200" y="509" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y3</text>
+<text x="-200" y="-30" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">南(S)</text>
+<text x="-200" y="528" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">北(N)</text>
+
+<!-- 屋根輪郭（点線） -->
+<rect x="-30" y="-30" width="720" height="560" fill="rgba(180,225,200,0.08)" stroke="#5aaa80" stroke-width="1" stroke-dasharray="10,5"/>
+
+<!-- 壁（切断面・太め表現） -->
+<rect x="0"   y="0"   width="660" height="14" fill="#7a6048" stroke="#4a3020" stroke-width="1.5"/>
+<rect x="0"   y="497" width="660" height="14" fill="#7a6048" stroke="#4a3020" stroke-width="1.5"/>
+<rect x="0"   y="0"   width="14"  height="511" fill="#7a6048" stroke="#4a3020" stroke-width="1.5"/>
+<rect x="647" y="0"   width="14"  height="511" fill="#7a6048" stroke="#4a3020" stroke-width="1.5"/>
+
+<!-- 引き戸開口（南壁 1800mm=180unit、中央X=210〜390） -->
+<rect x="210" y="0" width="180" height="14" fill="rgba(160,210,235,0.65)" stroke="#4a90c0" stroke-width="1.8"/>
+<line x1="210" y1="7"  x2="390" y2="7"  stroke="#4a90c0" stroke-width="2.2"/>
+<line x1="300" y1="0"  x2="300" y2="14" stroke="#4a90c0" stroke-width="1.2" stroke-dasharray="3,2"/>
+<!-- 開き記号 -->
+<line x1="210" y1="14" x2="210" y2="70" stroke="#4a90c0" stroke-width="1"/>
+<path d="M210,70 Q210,14 390,14" fill="none" stroke="#4a90c0" stroke-width="1" stroke-dasharray="4,2"/>
+
+<!-- 換気窓（南壁） -->
+<rect x="168" y="0" width="65" height="14" fill="rgba(160,210,235,0.5)" stroke="#4a90c0" stroke-width="1.2"/>
+<rect x="398" y="0" width="65" height="14" fill="rgba(160,210,235,0.5)" stroke="#4a90c0" stroke-width="1.2"/>
+
+<!-- 柱（全12本）12×12 -->
+<rect x="0"   y="0"   width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="149" y="0"   width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="299" y="0"   width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="449" y="0"   width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="599" y="0"   width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="0"   y="498" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="149" y="498" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="299" y="498" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="449" y="498" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="599" y="498" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="0"   y="249" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+<rect x="648" y="249" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1.3"/>
+
+<!-- 束石（各柱位置、点線）-->
+<rect x="-5"  y="-5"  width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="145" y="-5"  width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="295" y="-5"  width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="445" y="-5"  width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="595" y="-5"  width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="-5"  y="495" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="145" y="495" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="295" y="495" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="445" y="495" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="595" y="495" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="-5"  y="245" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="644" y="245" width="21" height="21" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+
+<!-- 中間土台 -->
+<line x1="0" y1="255" x2="660" y2="255" stroke="#8B6914" stroke-width="2.2" stroke-dasharray="10,5"/>
+
+<!-- 室内エリア -->
+<rect x="14" y="14" width="633" height="483" fill="rgba(255,252,245,0.35)"/>
+<text x="330" y="262" text-anchor="middle" fill="#999" font-family="'Noto Sans JP',sans-serif" font-size="20" opacity="0.45">作業スペース　30.0 ㎡</text>
+
+<!-- ====== 寸法線 ====== -->
+<!-- 全幅 X方向 -->
+<line x1="0" y1="-65" x2="660" y2="-65" stroke="#c0392b" stroke-width="1.3" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="330" y="-70" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="17">6,000</text>
+<line x1="0"   y1="-5"  x2="0"   y2="-72" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="660" y1="-5"  x2="660" y2="-72" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+
+<!-- 柱ピッチ X -->
+<line x1="0"   y1="-38" x2="150" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="75"   y="-43" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="11">1,500</text>
+<line x1="150" y1="-38" x2="300" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="225"  y="-43" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="11">1,500</text>
+<line x1="300" y1="-38" x2="450" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="375"  y="-43" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="11">1,500</text>
+<line x1="450" y1="-38" x2="600" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="525"  y="-43" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="11">1,500</text>
+<line x1="0"   y1="-5" x2="0"   y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="150" y1="-5" x2="150" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="300" y1="-5" x2="300" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="450" y1="-5" x2="450" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="600" y1="-5" x2="600" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 全奥行 Y方向 -->
+<line x1="760" y1="0" x2="760" y2="510" stroke="#c0392b" stroke-width="1.3" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="778" y="258" text-anchor="start" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-weight="700" font-size="17">5,000</text>
+<line x1="660" y1="0"   x2="766" y2="0"   stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="660" y1="510" x2="766" y2="510" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+
+<!-- Y=2500 -->
+<line x1="730" y1="0" x2="730" y2="255" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="745" y="130" text-anchor="start" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">2,500</text>
+<line x1="660" y1="255" x2="736" y2="255" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 引き戸幅 -->
+<line x1="210" y1="-92" x2="390" y2="-92" stroke="#c0392b" stroke-width="1.1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="300" y="-97" text-anchor="middle" fill="#c0392b" font-family="'Share Tech Mono',monospace" font-size="12">1,800（引き戸）</text>
+<line x1="210" y1="-5"  x2="210" y2="-99" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="390" y1="-5"  x2="390" y2="-99" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+
+<!-- 換気窓ラベル -->
+<text x="200" y="-110" text-anchor="middle" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="11">換気窓 600</text>
+<line x1="200" y1="-107" x2="200" y2="-7" stroke="#1a6ba0" stroke-width="0.8" stroke-dasharray="3,2"/>
+<text x="430" y="-110" text-anchor="middle" fill="#1a6ba0" font-family="'Noto Sans JP',sans-serif" font-size="11">換気窓 600</text>
+<line x1="430" y1="-107" x2="430" y2="-7" stroke="#1a6ba0" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+<!-- 凡例 -->
+<rect x="810" y="80" width="200" height="265" fill="white" stroke="#bbb" stroke-width="1.2" rx="3"/>
+<text x="910" y="100" text-anchor="middle" fill="#333" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="700">[ 凡 例 ]</text>
+<line x1="820" y1="106" x2="1000" y2="106" stroke="#ddd" stroke-width="0.8"/>
+
+<rect x="820" y="115" width="13" height="13" fill="#7a5c10" stroke="#4a3010" stroke-width="1"/>
+<text x="840" y="126" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">柱（105×105）</text>
+
+<rect x="820" y="135" width="35" height="10" fill="#7a6048" stroke="#4a3020" stroke-width="1"/>
+<text x="862" y="144" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">壁（t120）</text>
+
+<rect x="820" y="153" width="28" height="12" fill="rgba(160,210,235,0.65)" stroke="#4a90c0" stroke-width="1"/>
+<text x="855" y="163" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">開口部</text>
+
+<rect x="820" y="172" width="22" height="22" fill="none" stroke="#909090" stroke-width="0.9" stroke-dasharray="3,2"/>
+<text x="850" y="185" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">束石（点線）</text>
+
+<line x1="820" y1="210" x2="855" y2="210" stroke="#8B6914" stroke-width="2.2" stroke-dasharray="8,4"/>
+<text x="862" y="214" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">中間土台</text>
+
+<rect x="820" y="225" width="35" height="15" fill="rgba(180,225,200,0.1)" stroke="#5aaa80" stroke-width="1" stroke-dasharray="6,3"/>
+<text x="862" y="235" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">屋根投影</text>
+
+<line x1="820" y1="250" x2="855" y2="250" stroke="#c8c0b8" stroke-width="0.7" stroke-dasharray="10,5,2,5"/>
+<text x="862" y="254" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="12">構造軸線</text>
+
+<line x1="820" y1="270" x2="845" y2="270" stroke="#c0392b" stroke-width="1.2" marker-end="url(#pa)"/>
+<text x="852" y="274" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="12">寸法線</text>
+
+<text x="910" y="332" text-anchor="middle" fill="#999" font-family="'Share Tech Mono',monospace" font-size="10">SCALE 1:50</text>
+
+<!-- 方位記号 -->
+<circle cx="910" cy="430" r="50" fill="none" stroke="#333" stroke-width="1.8"/>
+<polygon points="910,380 896,445 910,430 924,445" fill="#333"/>
+<polygon points="910,480 896,415 910,430 924,415" fill="white" stroke="#333" stroke-width="1.2"/>
+<text x="910" y="375" text-anchor="middle" font-size="17" font-weight="800" fill="#222">N</text>
+<text x="910" y="500" text-anchor="middle" font-size="14" fill="#555">S</text>
+<text x="860" y="434" text-anchor="middle" font-size="14" fill="#555">W</text>
+<text x="960" y="434" text-anchor="middle" font-size="14" fill="#555">E</text>
+<text x="910" y="364" text-anchor="middle" font-size="10" fill="#888">方位</text>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">農作業小屋 設計図</div>
+  <div class="fc">図面番号: NF-SD-003</div>
+  <div class="fc">平面図（GL+1,200）　縮尺 1:50　単位 mm</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 4 / 4</div>
+</div>
+</div></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ナナカファーム 単管パイプ農作業小屋 設計図</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#f8f6f0; --ink:#1a1a2e; --dim:#c0392b;
+  --leader:#1a5f8a; --border:#8b7d6b;
+  --pipe:#8a8a90; --pipe-dark:#5a5a65;
+  --wall-fill:rgba(200,200,185,0.45);
+  --glass:rgba(160,210,230,0.4);
+  --roof:rgba(170,220,195,0.55);
+  --ground:#c5b896;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#3a3530;font-family:'Noto Sans JP',sans-serif;}
+
+.page{
+  width:1400px; height:990px;
+  background:var(--paper);
+  margin:24px auto;
+  box-shadow:0 6px 32px rgba(0,0,0,0.55);
+  display:flex; flex-direction:column;
+  border:2px solid #444; overflow:hidden;
+  page-break-after:always;
+}
+.frame-outer{border:5px solid var(--ink);margin:10px;flex:1;display:flex;flex-direction:column;}
+.frame-inner{border:2px solid var(--ink);margin:5px;flex:1;display:flex;flex-direction:column;}
+
+.title-bar{border-bottom:2px solid var(--ink);display:flex;align-items:stretch;background:#fff;flex-shrink:0;}
+.title-main{padding:8px 18px;flex:1;border-right:1.5px solid var(--ink);}
+.title-main h2{font-size:1.25rem;font-weight:700;letter-spacing:3px;color:var(--ink);}
+.title-main .en{font-size:0.62rem;color:#777;letter-spacing:2px;margin-top:3px;}
+.title-meta{display:grid;grid-template-columns:repeat(4,auto);font-size:0.66rem;}
+.mc{padding:3px 14px;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;flex-direction:column;justify-content:center;}
+.mc:nth-child(n+5){border-bottom:none;}
+.ml{color:#999;font-size:0.57rem;}
+.mv{font-weight:600;}
+
+.drawing-area{flex:1;display:flex;align-items:center;justify-content:center;padding:6px;overflow:hidden;}
+
+.footer{border-top:1.5px solid var(--ink);display:flex;font-size:0.6rem;color:#888;background:#fff;flex-shrink:0;}
+.fc{padding:3px 12px;border-right:1px solid #ccc;}
+
+/* SVG共通 */
+.dim-line{stroke:#c0392b;stroke-width:1;fill:none;}
+.dim-text{fill:#c0392b;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.ldr-line{stroke:#1a5f8a;stroke-width:0.8;fill:none;stroke-dasharray:4,2;}
+.ldr-text{fill:#1a5f8a;font-family:'Noto Sans JP',sans-serif;}
+.axis-line{stroke:#b0b8c8;stroke-width:0.5;stroke-dasharray:10,5,2,5;fill:none;}
+.pipe-col{fill:var(--pipe);stroke:var(--pipe-dark);stroke-width:1.2;}
+.pipe-line{stroke:var(--pipe);stroke-width:4;stroke-linecap:round;}
+.wall-fill{fill:var(--wall-fill);stroke:var(--pipe-dark);stroke-width:1;}
+.glass-fill{fill:var(--glass);stroke:#5090b0;stroke-width:1.2;}
+.roof-fill{fill:var(--roof);stroke:#3a8060;stroke-width:1.5;}
+.ground-fill{fill:var(--ground);stroke:#6b5030;stroke-width:1.5;}
+
+/* 設計書スタイル */
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1;}
+.spec-col{padding:18px 22px;border-right:1px solid var(--ink);}
+.spec-col:last-child{border-right:none;}
+.spec-section-title{font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:2px;color:var(--ink);border-bottom:1.5px solid var(--ink);padding-bottom:5px;margin-bottom:12px;}
+table{width:100%;border-collapse:collapse;font-size:0.7rem;margin-bottom:16px;}
+th{background:#e8e2d8;padding:4px 8px;text-align:left;border:1px solid #bbb;font-weight:600;font-size:0.63rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;}
+td{padding:4px 8px;border:1px solid #ddd;color:#333;}
+tr:nth-child(even) td{background:#f5f1eb;}
+.cat-tag{display:inline-block;font-size:0.56rem;padding:1px 5px;border-radius:1px;margin-right:5px;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.cat-f{background:rgba(74,200,120,0.15);color:#2a7a50;border:1px solid rgba(74,200,120,0.4);}
+.cat-s{background:rgba(77,150,220,0.12);color:#1a5f8a;border:1px solid rgba(77,150,220,0.3);}
+.cat-r{background:rgba(100,180,200,0.12);color:#1a6878;border:1px solid rgba(100,180,200,0.3);}
+.cat-o{background:rgba(220,160,40,0.12);color:#8a6010;border:1px solid rgba(220,160,40,0.3);}
+.cost{font-family:'Share Tech Mono',monospace;color:#333;}
+.total-row td{background:#1a1a2e!important;color:#f0c040;font-weight:700;font-family:'Share Tech Mono',monospace;}
+
+.note-block{background:rgba(240,192,64,0.06);border-left:3px solid #d0a030;padding:8px 12px;font-size:0.68rem;color:#555;line-height:1.7;margin-top:8px;}
+.note-block strong{color:#8a6010;}
+
+.step-list{list-style:none;}
+.step-item{display:flex;gap:10px;margin-bottom:8px;font-size:0.7rem;}
+.step-num{font-family:'Share Tech Mono',monospace;color:#1a5f8a;font-weight:700;min-width:28px;font-size:0.68rem;padding-top:1px;}
+.step-title{font-weight:600;color:#1a1a2e;margin-bottom:2px;font-size:0.72rem;}
+.step-note{color:#666;font-size:0.64rem;}
+</style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- PAGE 1: 完成予想図                                                  -->
+<!-- ================================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>完成予想図　3Dパース</h2>
+    <div class="en">PERSPECTIVE RENDERING — NANAKA FARM TANKAN PIPE SHED  |  農研機構マニュアル準拠</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">TP-SD-000</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">N.T.S.</div></div>
+    <div class="mc"><div class="ml">作成日</div><div class="mv">2026.03</div></div>
+    <div class="mc"><div class="ml">施主</div><div class="mv">七花ファーム</div></div>
+    <div class="mc"><div class="ml">建築面積</div><div class="mv">30.0 ㎡</div></div>
+    <div class="mc"><div class="ml">構造</div><div class="mv">単管パイプ φ48.6mm</div></div>
+    <div class="mc"><div class="ml">屋根形状</div><div class="mv">片流れ 1/10勾配</div></div>
+    <div class="mc"><div class="ml">基礎</div><div class="mv">スパイラル杭 900mm</div></div>
+  </div>
+</div>
+
+<div class="drawing-area" style="background:#111827;flex-direction:column;gap:0;">
+<svg viewBox="0 0 1340 830" xmlns="http://www.w3.org/2000/svg" width="1340" height="830">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#1e3a5f"/></linearGradient>
+  <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2d5a1e"/><stop offset="100%" stop-color="#1a3510"/></linearGradient>
+  <linearGradient id="pipe-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#c0c0c8"/><stop offset="50%" stop-color="#e8e8f0"/><stop offset="100%" stop-color="#a0a0a8"/></linearGradient>
+  <linearGradient id="wall-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(200,200,185,0.7)"/><stop offset="100%" stop-color="rgba(180,180,165,0.5)"/></linearGradient>
+  <linearGradient id="roof-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(200,240,215,0.82)"/><stop offset="100%" stop-color="rgba(160,215,190,0.68)"/></linearGradient>
+  <filter id="shd"><feDropShadow dx="4" dy="6" stdDeviation="4" flood-color="rgba(0,0,0,0.4)"/></filter>
+  <marker id="a1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#e74c3c"/></marker>
+  <marker id="a2" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto"><path d="M7,0L0,3.5L7,7Z" fill="#e74c3c"/></marker>
+</defs>
+
+<rect width="1340" height="830" fill="url(#sky)"/>
+<ellipse cx="670" cy="740" rx="620" ry="70" fill="url(#grd)" opacity="0.7"/>
+<ellipse cx="640" cy="688" rx="270" ry="20" fill="rgba(0,0,0,0.28)"/>
+
+<!-- スパイラル杭（地中）-->
+<line x1="278" y1="640" x2="278" y2="680" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="396" y1="637" x2="396" y2="677" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="514" y1="634" x2="514" y2="674" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="632" y1="631" x2="632" y2="671" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="750" y1="628" x2="750" y2="668" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+
+<!-- 根太パイプ（地面レベル）-->
+<line x1="258" y1="640" x2="770" y2="628" stroke="url(#pipe-grad)" stroke-width="4"/>
+<line x1="258" y1="640" x2="258" y2="628" stroke="url(#pipe-grad)" stroke-width="4"/>
+<line x1="770" y1="628" x2="770" y2="616" stroke="url(#pipe-grad)" stroke-width="4"/>
+
+<!-- 壁面（南・手前）filter shadow -->
+<g filter="url(#shd)">
+  <!-- 左パネル -->
+  <rect x="278" y="368" width="118" height="272" fill="url(#wall-s)" stroke="rgba(150,150,135,0.8)" stroke-width="1"/>
+  <line x1="298" y1="368" x2="298" y2="640" stroke="rgba(120,120,105,0.4)" stroke-width="0.6"/>
+  <line x1="318" y1="368" x2="318" y2="640" stroke="rgba(120,120,105,0.4)" stroke-width="0.6"/>
+  <line x1="338" y1="368" x2="338" y2="640" stroke="rgba(120,120,105,0.4)" stroke-width="0.6"/>
+  <!-- 左中パネル -->
+  <rect x="396" y="368" width="75" height="272" fill="url(#wall-s)" stroke="rgba(150,150,135,0.8)" stroke-width="1"/>
+  <!-- ドア上枠 -->
+  <rect x="471" y="368" width="140" height="90" fill="url(#wall-s)" stroke="rgba(150,150,135,0.8)" stroke-width="1"/>
+  <!-- ガラスドア左 -->
+  <rect x="471" y="458" width="66" height="182" fill="rgba(160,215,235,0.38)" stroke="#5090b0" stroke-width="1.5"/>
+  <line x1="504" y1="458" x2="504" y2="640" stroke="#5090b0" stroke-width="0.8"/>
+  <!-- ガラスドア右 -->
+  <rect x="541" y="458" width="70" height="182" fill="rgba(145,205,225,0.33)" stroke="#5090b0" stroke-width="1.5"/>
+  <line x1="576" y1="458" x2="576" y2="640" stroke="#5090b0" stroke-width="0.8"/>
+  <!-- ドア枠 -->
+  <rect x="471" y="368" width="140" height="272" fill="none" stroke="#4a88b0" stroke-width="2"/>
+  <line x1="611" y1="368" x2="611" y2="640" stroke="#a0a0a8" stroke-width="1.5"/>
+  <!-- 右中パネル -->
+  <rect x="611" y="368" width="130" height="272" fill="url(#wall-s)" stroke="rgba(150,150,135,0.8)" stroke-width="1"/>
+  <!-- 右パネル -->
+  <rect x="741" y="368" width="29" height="272" fill="url(#wall-s)" stroke="rgba(150,150,135,0.8)" stroke-width="1"/>
+</g>
+
+<!-- 東面壁 -->
+<polygon points="770,368 860,320 860,600 770,640" fill="rgba(185,185,170,0.55)" stroke="rgba(140,140,125,0.8)" stroke-width="1"/>
+
+<!-- 単管柱（前面5本） -->
+<line x1="278" y1="368" x2="278" y2="640" stroke="url(#pipe-grad)" stroke-width="5"/>
+<line x1="396" y1="368" x2="396" y2="640" stroke="url(#pipe-grad)" stroke-width="5"/>
+<line x1="514" y1="368" x2="514" y2="640" stroke="url(#pipe-grad)" stroke-width="5"/>
+<line x1="632" y1="368" x2="632" y2="640" stroke="url(#pipe-grad)" stroke-width="5"/>
+<line x1="750" y1="368" x2="750" y2="640" stroke="url(#pipe-grad)" stroke-width="5"/>
+
+<!-- 横胴縁 -->
+<line x1="268" y1="530" x2="760" y2="530" stroke="url(#pipe-grad)" stroke-width="3.5" opacity="0.8"/>
+<line x1="268" y1="475" x2="760" y2="475" stroke="url(#pipe-grad)" stroke-width="3.5" opacity="0.8"/>
+
+<!-- 南側軒桁 -->
+<rect x="258" y="352" width="512" height="17" fill="url(#pipe-grad)" stroke="#808088" stroke-width="1"/>
+
+<!-- 垂木（傾斜）-->
+<line x1="263" y1="344" x2="855" y2="304" stroke="url(#pipe-grad)" stroke-width="4"/>
+<line x1="383" y1="341" x2="972" y2="301" stroke="url(#pipe-grad)" stroke-width="4" opacity="0.6"/>
+
+<!-- 横垂木（桟）-->
+<line x1="263" y1="320" x2="863" y2="282" stroke="#c0c0c8" stroke-width="2.5" opacity="0.7"/>
+<line x1="263" y1="330" x2="863" y2="292" stroke="#c0c0c8" stroke-width="2.5" opacity="0.7"/>
+<line x1="263" y1="340" x2="863" y2="302" stroke="#c0c0c8" stroke-width="2.5" opacity="0.7"/>
+
+<!-- ポリカ屋根 -->
+<polygon points="248,340 858,298 858,316 248,358" fill="url(#roof-grad)" stroke="#3a8060" stroke-width="1.8"/>
+<line x1="260" y1="347" x2="855" y2="307" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+
+<!-- ラベル群 -->
+<text x="180" y="300" text-anchor="end" fill="#90d4b0" font-size="11.5" font-family="'Share Tech Mono',monospace">ポリカ波板 t8</text>
+<line x1="182" y1="298" x2="250" y2="340" stroke="#90d4b0" stroke-width="0.8"/>
+<text x="180" y="315" text-anchor="end" fill="#c0c0c8" font-size="11.5" font-family="'Share Tech Mono',monospace">横垂木 φ31.8</text>
+<text x="180" y="330" text-anchor="end" fill="#d0c090" font-size="11.5" font-family="'Share Tech Mono',monospace">軒桁 φ48.6</text>
+<line x1="182" y1="328" x2="260" y2="358" stroke="#d0c090" stroke-width="0.8"/>
+<text x="180" y="380" text-anchor="end" fill="#e0e0e8" font-size="11.5" font-family="'Share Tech Mono',monospace">単管柱 φ48.6</text>
+<line x1="182" y1="378" x2="278" y2="380" stroke="#e0e0e8" stroke-width="0.8"/>
+<text x="180" y="500" text-anchor="end" fill="#b0b8c0" font-size="11.5" font-family="'Share Tech Mono',monospace">ポリカ壁 t8</text>
+<line x1="182" y1="498" x2="280" y2="490" stroke="#b0b8c0" stroke-width="0.8"/>
+<text x="180" y="530" text-anchor="end" fill="#7ad4a0" font-size="11.5" font-family="'Share Tech Mono',monospace">横胴縁 φ48.6</text>
+<line x1="182" y1="528" x2="270" y2="530" stroke="#7ad4a0" stroke-width="0.8"/>
+<text x="180" y="650" text-anchor="end" fill="#e0e0e8" font-size="11.5" font-family="'Share Tech Mono',monospace">根太パイプ</text>
+<text x="180" y="675" text-anchor="end" fill="#4af0a0" font-size="11.5" font-family="'Share Tech Mono',monospace">スパイラル杭↓</text>
+<line x1="182" y1="673" x2="278" y2="660" stroke="#4af0a0" stroke-width="0.8"/>
+
+<!-- 右側ラベル -->
+<text x="880" y="310" fill="#d0c090" font-size="11.5" font-family="'Share Tech Mono',monospace">北側 H=2,500</text>
+<text x="880" y="380" fill="#b0b8c0" font-size="11.5" font-family="'Share Tech Mono',monospace">東妻面</text>
+
+<!-- 高さ寸法 -->
+<line x1="890" y1="368" x2="890" y2="640" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="905" y="510" fill="#e74c3c" font-size="13" font-family="'Share Tech Mono',monospace" font-weight="bold">H=3,000</text>
+<text x="905" y="526" fill="#e74c3c" font-size="10" font-family="'Noto Sans JP',sans-serif">南側軒高</text>
+
+<!-- 幅寸法 -->
+<line x1="278" y1="680" x2="770" y2="668" stroke="#e74c3c" stroke-width="1.2" marker-end="url(#a1)" marker-start="url(#a2)"/>
+<text x="524" y="674" text-anchor="middle" fill="#e74c3c" font-size="15" font-family="'Share Tech Mono',monospace" font-weight="bold">6,000 mm</text>
+<line x1="278" y1="640" x2="278" y2="686" stroke="#e74c3c" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="770" y1="628" x2="770" y2="674" stroke="#e74c3c" stroke-width="0.6" stroke-dasharray="2,2"/>
+
+<!-- タイトル -->
+<text x="670" y="38" text-anchor="middle" fill="white" font-size="20" font-family="'Noto Sans JP',sans-serif" font-weight="700" letter-spacing="4">ナナカファーム　単管パイプ農作業小屋　完成予想図</text>
+<text x="670" y="60" text-anchor="middle" fill="#8888bb" font-size="12" font-family="'Share Tech Mono',monospace">NANAKA FARM — TANKAN PIPE SHED  ·  6,000 × 5,000 mm  ·  φ48.6mm 単管  ·  片流れ 1/10  ·  農研機構マニュアル準拠</text>
+
+<!-- スペック表 -->
+<rect x="1010" y="420" width="300" height="260" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+<text x="1160" y="440" text-anchor="middle" fill="#aaaacc" font-size="11" font-family="'Noto Sans JP',sans-serif" font-weight="700">建物概要</text>
+<line x1="1015" y1="446" x2="1305" y2="446" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
+<text x="1025" y="466" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">構造  単管φ48.6mm 軸組</text>
+<text x="1025" y="484" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">面積  30.0㎡（6,000×5,000）</text>
+<text x="1025" y="502" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">軒高  南3,000 / 北2,500mm</text>
+<text x="1025" y="520" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">基礎  スパイラル杭φ48.6×900</text>
+<text x="1025" y="538" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">屋根  片流れ1/10勾配 ポリカt8</text>
+<text x="1025" y="556" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">建具  両開きドア W1200×H2000</text>
+<text x="1025" y="574" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">柱    φ48.6mm @1500mm</text>
+<text x="1025" y="592" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">垂木  φ48.6mm @1500mm</text>
+<text x="1025" y="610" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">横垂木 φ31.8mm @850mm</text>
+<text x="1025" y="628" fill="#8888aa" font-size="11" font-family="'Share Tech Mono',monospace">外壁  ポリカ波板 t8 半透明</text>
+<text x="1025" y="648" fill="#f0c040" font-size="12" font-family="'Share Tech Mono',monospace" font-weight="bold">概算 ¥237,100〜</text>
+<text x="1025" y="664" fill="#8888aa" font-size="10" font-family="'Noto Sans JP',sans-serif">工具・施工費別</text>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">単管パイプ農作業小屋 設計図</div>
+  <div class="fc">図面番号: TP-SD-000</div>
+  <div class="fc">完成予想図 (3Dパース) ｜農研機構「建設足場資材利用園芸ハウス施工マニュアル」準拠</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 1 / 5</div>
+</div>
+</div></div></div>
+
+<!-- ================================================================ -->
+<!-- PAGE 2: 正面図（南面）                                              -->
+<!-- ================================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>正面図（南面）</h2>
+    <div class="en">FRONT ELEVATION — SOUTH FACE  |  縮尺 1:50  ·  単位 mm</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">TP-SD-001</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">1:50</div></div>
+    <div class="mc"><div class="ml">全幅</div><div class="mv">6,000 mm</div></div>
+    <div class="mc"><div class="ml">壁高さ</div><div class="mv">3,000 mm</div></div>
+    <div class="mc"><div class="ml">柱ピッチ</div><div class="mv">1,500 mm</div></div>
+    <div class="mc"><div class="ml">柱本数</div><div class="mv">5本（南列）</div></div>
+    <div class="mc"><div class="ml">ドア</div><div class="mv">W1,200×H2,000</div></div>
+    <div class="mc"><div class="ml">構造</div><div class="mv">単管 φ48.6mm</div></div>
+  </div>
+</div>
+
+<div class="drawing-area">
+<svg viewBox="-260 -100 1360 780" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g1" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0L0,0 0,30" fill="none" stroke="#e8e0d0" stroke-width="0.4"/></pattern>
+  <marker id="fa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#c0392b"/></marker>
+  <marker id="fb" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0L0,4L8,8Z" fill="#c0392b"/></marker>
+  <marker id="fl" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0L6,3L0,6Z" fill="#1a5f8a"/></marker>
+</defs>
+<rect x="-30" y="-70" width="760" height="680" fill="url(#g1)"/>
+
+<!-- 軸線 -->
+<line x1="5"   y1="-80" x2="5"   y2="530" class="axis-line"/>
+<line x1="155" y1="-80" x2="155" y2="530" class="axis-line"/>
+<line x1="305" y1="-80" x2="305" y2="530" class="axis-line"/>
+<line x1="455" y1="-80" x2="455" y2="530" class="axis-line"/>
+<line x1="605" y1="-80" x2="605" y2="530" class="axis-line"/>
+<circle cx="5"   cy="-80" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="5"   y="-76" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X1</text>
+<circle cx="155" cy="-80" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="155" y="-76" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X2</text>
+<circle cx="305" cy="-80" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="305" y="-76" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X3</text>
+<circle cx="455" cy="-80" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="455" y="-76" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X4</text>
+<circle cx="605" cy="-80" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="605" y="-76" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X5</text>
+
+<!-- 地面 GL -->
+<rect x="-30" y="430" width="720" height="18" class="ground-fill"/>
+<line x1="-30" y1="430" x2="730" y2="430" stroke="#333" stroke-width="1.8"/>
+<text x="-35" y="433" text-anchor="end" font-size="11" fill="#333" font-family="'Share Tech Mono',monospace">GL</text>
+<!-- 地面ハッチ -->
+<line x1="-30" y1="436" x2="730" y2="436" stroke="#9a8060" stroke-width="0.5"/>
+<line x1="-30" y1="443" x2="730" y2="443" stroke="#9a8060" stroke-width="0.5"/>
+
+<!-- スパイラル杭（地中表現） -->
+<line x1="5"   y1="430" x2="5"   y2="460" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="155" y1="430" x2="155" y2="460" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="305" y1="430" x2="305" y2="460" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="455" y1="430" x2="455" y2="460" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="605" y1="430" x2="605" y2="460" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+
+<!-- 根太パイプ（GL） -->
+<line x1="-20" y1="430" x2="680" y2="430" stroke="#8a8a90" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+<!-- 壁パネル（南面）-->
+<!-- 左パネル X=0〜1500 -->
+<rect x="0"   y="130" width="150" height="300" class="wall-fill"/>
+<!-- 左中パネル X=1500〜2100 -->
+<rect x="150" y="130" width="60"  height="300" class="wall-fill"/>
+<!-- ドア上枠 -->
+<rect x="210" y="130" width="120" height="70"  class="wall-fill"/>
+<!-- ドアガラス -->
+<rect x="210" y="200" width="58"  height="230" class="glass-fill"/>
+<rect x="272" y="200" width="58"  height="230" class="glass-fill"/>
+<!-- ドア枠 -->
+<rect x="210" y="130" width="120" height="300" fill="none" stroke="#4a88b0" stroke-width="2.2"/>
+<line x1="270" y1="130" x2="270" y2="430" stroke="#8a8a90" stroke-width="1.5"/>
+<line x1="210" y1="200" x2="330" y2="200" stroke="#4a88b0" stroke-width="1.5"/>
+<!-- 右中パネル X=3300〜4500 -->
+<rect x="330" y="130" width="120" height="300" class="wall-fill"/>
+<!-- 右パネル X=4500〜6000 -->
+<rect x="450" y="130" width="150" height="300" class="wall-fill"/>
+
+<!-- 横胴縁 -->
+<line x1="-20" y1="350" x2="680" y2="350" stroke="#8a8a90" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+<line x1="-20" y1="270" x2="680" y2="270" stroke="#8a8a90" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+
+<!-- 単管柱（5本）φ48.6mm ≈ 5unit -->
+<line x1="5"   y1="130" x2="5"   y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+<line x1="155" y1="130" x2="155" y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+<line x1="305" y1="130" x2="305" y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+<line x1="455" y1="130" x2="455" y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+<line x1="605" y1="130" x2="605" y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+
+<!-- 軒桁（南面 Z=3000） -->
+<line x1="-30" y1="130" x2="690" y2="130" stroke="#8a8a90" stroke-width="7" stroke-linecap="round"/>
+<!-- 垂木断面（正面から見た帯） -->
+<line x1="-30" y1="118" x2="690" y2="118" stroke="#8a8a90" stroke-width="5" opacity="0.8"/>
+<!-- 横垂木 -->
+<line x1="-30" y1="108" x2="690" y2="108" stroke="#9a9aa0" stroke-width="3" opacity="0.7"/>
+<!-- ポリカ屋根 -->
+<rect x="-30" y="98"  width="720" height="10" class="roof-fill"/>
+
+<!-- 中心線（ドア） -->
+<line x1="270" y1="-15" x2="270" y2="435" stroke="#aaaacc" stroke-width="0.5" stroke-dasharray="10,4,2,4"/>
+<!-- 筋交い（X=0〜1500） -->
+<line x1="10"  y1="420" x2="148" y2="140" stroke="#c0c0c8" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="148" y1="420" x2="10"  y2="140" stroke="#c0c0c8" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+<!-- ====== 寸法線 ====== -->
+<!-- 全幅 6000 -->
+<line x1="0" y1="510" x2="660" y2="510" stroke="#c0392b" stroke-width="1.2" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="330" y="504" text-anchor="middle" class="dim-text" font-size="16">6,000</text>
+<line x1="0"   y1="430" x2="0"   y2="517" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="660" y1="430" x2="660" y2="517" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<!-- 柱ピッチ -->
+<line x1="0"   y1="480" x2="150" y2="480" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="75"   y="475" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="150" y1="480" x2="300" y2="480" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="225"  y="475" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="300" y1="480" x2="450" y2="480" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="375"  y="475" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="450" y1="480" x2="600" y2="480" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="525"  y="475" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="0"   y1="462" x2="0"   y2="486" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="150" y1="462" x2="150" y2="486" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="300" y1="462" x2="300" y2="486" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="450" y1="462" x2="450" y2="486" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<line x1="600" y1="462" x2="600" y2="486" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="2,2"/>
+<!-- ドア幅 1200 -->
+<line x1="210" y1="540" x2="330" y2="540" stroke="#c0392b" stroke-width="1.1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="270" y="534" text-anchor="middle" class="dim-text" font-size="11">1,200（ドア）</text>
+<line x1="210" y1="430" x2="210" y2="547" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="330" y1="430" x2="330" y2="547" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<!-- 壁高 3000 右 -->
+<line x1="710" y1="130" x2="710" y2="430" stroke="#c0392b" stroke-width="1.3" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="728" y="285" text-anchor="start" class="dim-text" font-size="16">3,000</text>
+<text x="728" y="302" text-anchor="start" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="11">南側軒高</text>
+<line x1="660" y1="130" x2="716" y2="130" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="660" y1="430" x2="716" y2="430" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<!-- ドア高 2000 左 -->
+<line x1="-55" y1="200" x2="-55" y2="430" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="-70" y="320" text-anchor="end" class="dim-text" font-size="13">2,000</text>
+<line x1="0"   y1="200" x2="-61" y2="200" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<!-- 屋根 -->
+<line x1="-100" y1="98" x2="-100" y2="130" stroke="#c0392b" stroke-width="0.9" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="-115" y="117" text-anchor="end" class="dim-text" font-size="9">杭+桁</text>
+<!-- 軒出 -->
+<line x1="0" y1="555" x2="-30" y2="555" stroke="#c0392b" stroke-width="1" marker-end="url(#fa)" marker-start="url(#fb)"/>
+<text x="-15" y="549" text-anchor="middle" class="dim-text" font-size="10">300</text>
+<text x="-15" y="562" text-anchor="middle" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="8">軒出</text>
+<line x1="-30" y1="430" x2="-30" y2="562" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- 部材ラベル -->
+<text x="-215" y="101" class="ldr-text" font-size="12">ポリカ波板 t8</text>
+<line x1="-30" y1="103" x2="-100" y2="103" class="ldr-line" marker-end="url(#fl)"/>
+<text x="-215" y="115" class="ldr-text" font-size="12">横垂木 φ31.8</text>
+<text x="-215" y="129" class="ldr-text" font-size="12">軒桁 φ48.6</text>
+<line x1="-30" y1="127" x2="-100" y2="127" class="ldr-line" marker-end="url(#fl)"/>
+<text x="-215" y="200" class="ldr-text" font-size="12">単管柱 φ48.6</text>
+<line x1="0"   y1="200" x2="-100" y2="200" class="ldr-line" marker-end="url(#fl)"/>
+<text x="-215" y="272" class="ldr-text" font-size="12">横胴縁 φ48.6</text>
+<text x="-215" y="284" class="ldr-text" font-size="10">（補強・壁下地）</text>
+<line x1="-20" y1="270" x2="-100" y2="272" class="ldr-line" marker-end="url(#fl)"/>
+<text x="-215" y="370" class="ldr-text" font-size="12">ポリカ壁パネル</text>
+<line x1="0"   y1="365" x2="-100" y2="368" class="ldr-line" marker-end="url(#fl)"/>
+<text x="-215" y="432" class="ldr-text" font-size="12">根太パイプ</text>
+<line x1="0"   y1="430" x2="-100" y2="430" class="ldr-line" marker-end="url(#fl)"/>
+<text x="-215" y="458" class="ldr-text" font-size="12" fill="#4af0a0">スパイラル杭↓</text>
+<line x1="5"   y1="450" x2="-100" y2="455" class="ldr-line" stroke="#4af0a0" marker-end="url(#fl)"/>
+<!-- ドアラベル -->
+<text x="270" y="175" text-anchor="middle" class="ldr-text" font-size="11">両開きドア</text>
+<text x="270" y="188" text-anchor="middle" class="ldr-text" font-size="10">W1200×H2000</text>
+<!-- 右側 -->
+<text x="690" y="355" class="ldr-text" font-size="11">横胴縁@800</text>
+<text x="690" y="275" class="ldr-text" font-size="11">横胴縁@1600</text>
+<text x="690" y="208" class="ldr-text" font-size="11">筋交い（ブレース）</text>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">単管パイプ農作業小屋 設計図</div>
+  <div class="fc">図面番号: TP-SD-001</div>
+  <div class="fc">正面図（南面）　縮尺 1:50　単位 mm</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 2 / 5</div>
+</div>
+</div></div></div>
+
+<!-- ================================================================ -->
+<!-- PAGE 3: 側面図（西面）                                              -->
+<!-- ================================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>側面図（西面）</h2>
+    <div class="en">SIDE ELEVATION — WEST FACE  |  縮尺 1:50  ·  単位 mm</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">TP-SD-002</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">1:50</div></div>
+    <div class="mc"><div class="ml">南側軒高</div><div class="mv">3,000 mm</div></div>
+    <div class="mc"><div class="ml">北側軒高</div><div class="mv">2,500 mm</div></div>
+    <div class="mc"><div class="ml">高低差</div><div class="mv">500 mm</div></div>
+    <div class="mc"><div class="ml">奥行き</div><div class="mv">5,000 mm</div></div>
+    <div class="mc"><div class="ml">屋根勾配</div><div class="mv">1/10（5.7°）</div></div>
+    <div class="mc"><div class="ml">軒出</div><div class="mv">300 mm</div></div>
+  </div>
+</div>
+
+<div class="drawing-area">
+<svg viewBox="-320 -120 1280 780" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g2" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0L0,0 0,30" fill="none" stroke="#e8e0d0" stroke-width="0.4"/></pattern>
+  <marker id="sa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#c0392b"/></marker>
+  <marker id="sb" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0L0,4L8,8Z" fill="#c0392b"/></marker>
+  <marker id="sl" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0L6,3L0,6Z" fill="#1a5f8a"/></marker>
+</defs>
+<rect x="-30" y="-90" width="580" height="660" fill="url(#g2)"/>
+
+<!-- 軸線 Y方向 -->
+<line x1="5"   y1="-100" x2="5"   y2="560" class="axis-line"/>
+<line x1="255" y1="-100" x2="255" y2="560" class="axis-line"/>
+<line x1="505" y1="-100" x2="505" y2="560" class="axis-line"/>
+<circle cx="5"   cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="5"   y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y1</text>
+<circle cx="255" cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="255" y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y2</text>
+<circle cx="505" cy="-100" r="13" fill="white" stroke="#888" stroke-width="0.9"/>
+<text x="505" y="-96" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y3</text>
+<text x="5"   y="-113" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">南(S)</text>
+<text x="505" y="-113" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">北(N)</text>
+
+<!-- GL・地面 -->
+<rect x="-30" y="430" width="580" height="18" class="ground-fill"/>
+<line x1="-30" y1="430" x2="550" y2="430" stroke="#333" stroke-width="1.8"/>
+<text x="-35" y="433" text-anchor="end" font-size="11" fill="#333" font-family="'Share Tech Mono',monospace">GL</text>
+<line x1="-30" y1="436" x2="550" y2="436" stroke="#9a8060" stroke-width="0.5"/>
+<line x1="-30" y1="443" x2="550" y2="443" stroke="#9a8060" stroke-width="0.5"/>
+
+<!-- スパイラル杭（Y=0,2500,5000） -->
+<line x1="5"   y1="430" x2="5"   y2="462" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="255" y1="430" x2="255" y2="462" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+<line x1="505" y1="430" x2="505" y2="462" stroke="#4af0a0" stroke-width="2.5" stroke-dasharray="4,3"/>
+
+<!-- 根太パイプ（GL） -->
+<line x1="-20" y1="430" x2="525" y2="430" stroke="#8a8a90" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+<!-- 壁（側面から見た全体・片流れ台形）-->
+<!-- Y=0 H=3000 → top=130, Y=5000 H=2500 → top=180 -->
+<polygon points="0,130 500,180 500,430 0,430" class="wall-fill"/>
+<!-- 壁の横胴縁ライン -->
+<line x1="0" y1="350" x2="500" y2="355" stroke="#8a8a90" stroke-width="3.5" opacity="0.7"/>
+<line x1="0" y1="270" x2="500" y2="275" stroke="#8a8a90" stroke-width="3.5" opacity="0.7"/>
+
+<!-- 柱（3本）-->
+<line x1="5"   y1="130" x2="5"   y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+<line x1="255" y1="155" x2="255" y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+<line x1="505" y1="180" x2="505" y2="430" stroke="#8a8a90" stroke-width="6" stroke-linecap="round"/>
+
+<!-- 軒桁（南・高い側） -->
+<line x1="-30" y1="130" x2="10"  y2="130" stroke="#8a8a90" stroke-width="7" stroke-linecap="round"/>
+<!-- 軒桁（北・低い側） -->
+<line x1="495" y1="180" x2="535" y2="180" stroke="#8a8a90" stroke-width="7" stroke-linecap="round"/>
+<!-- 桁の傾斜ライン（南3000→北2500） -->
+<line x1="-30" y1="130" x2="535" y2="180" stroke="#8a8a90" stroke-width="4" opacity="0.7"/>
+
+<!-- 垂木断面（正方形断面 側面から） -->
+<rect x="-35" y="118" width="12" height="12" class="pipe-col"/>
+<rect x="60"  y="115" width="12" height="12" class="pipe-col"/>
+<rect x="160" y="112" width="12" height="12" class="pipe-col"/>
+<rect x="260" y="135" width="12" height="12" class="pipe-col"/>
+<rect x="360" y="142" width="12" height="12" class="pipe-col"/>
+<rect x="460" y="149" width="12" height="12" class="pipe-col"/>
+<rect x="520" y="154" width="12" height="12" class="pipe-col"/>
+
+<!-- 横垂木断面（円形）-->
+<circle cx="-26" cy="109" r="5" class="pipe-col"/>
+<circle cx="68"  cy="106" r="5" class="pipe-col"/>
+<circle cx="168" cy="103" r="5" class="pipe-col"/>
+<circle cx="268" cy="126" r="5" class="pipe-col"/>
+<circle cx="368" cy="133" r="5" class="pipe-col"/>
+<circle cx="468" cy="140" r="5" class="pipe-col"/>
+<circle cx="526" cy="145" r="5" class="pipe-col"/>
+
+<!-- 野地板（傾斜） -->
+<polygon points="-35,118 535,168 535,174 -35,124" fill="#c8a870" opacity="0.6" stroke="#a08850" stroke-width="0.8"/>
+<!-- ポリカ屋根（傾斜） -->
+<polygon points="-35,100 535,150 535,168 -35,118" class="roof-fill"/>
+<line x1="-32" y1="106" x2="533" y2="156" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+
+<!-- 筋交い -->
+<line x1="10"  y1="420" x2="248" y2="163" stroke="#c0c0c8" stroke-width="2" stroke-dasharray="6,3"/>
+
+<!-- 中間土台ライン -->
+<line x1="0" y1="430" x2="500" y2="430" stroke="#8a8a90" stroke-width="3" opacity="0.5" stroke-dasharray="6,4"/>
+<text x="250" y="426" text-anchor="middle" fill="#8a8a90" font-family="'Noto Sans JP',sans-serif" font-size="9">中間根太（Y=2,500）</text>
+
+<!-- ====== 寸法線 ====== -->
+<!-- 全奥行 5000 -->
+<line x1="0" y1="510" x2="500" y2="510" stroke="#c0392b" stroke-width="1.2" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="250" y="504" text-anchor="middle" class="dim-text" font-size="16">5,000</text>
+<line x1="0"   y1="430" x2="0"   y2="517" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="500" y1="430" x2="500" y2="517" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<!-- Y=2500 -->
+<line x1="0" y1="488" x2="255" y2="488" stroke="#c0392b" stroke-width="1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="127" y="483" text-anchor="middle" class="dim-text" font-size="11">2,500</text>
+<line x1="255" y1="430" x2="255" y2="494" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<!-- 南側軒高 3000（左） -->
+<line x1="-175" y1="130" x2="-175" y2="430" stroke="#c0392b" stroke-width="1.3" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="-190" y="285" text-anchor="end" class="dim-text" font-size="16">3,000</text>
+<text x="-190" y="302" text-anchor="end" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="11">南側軒高</text>
+<line x1="0"    y1="130" x2="-181" y2="130" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="0"    y1="430" x2="-181" y2="430" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<!-- 北側軒高 2500（右） -->
+<line x1="655" y1="180" x2="655" y2="430" stroke="#c0392b" stroke-width="1.3" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="672" y="310" text-anchor="start" class="dim-text" font-size="16">2,500</text>
+<text x="672" y="327" text-anchor="start" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="11">北側軒高</text>
+<line x1="500" y1="180" x2="661" y2="180" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="500" y1="430" x2="661" y2="430" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<!-- 高低差 500 -->
+<line x1="580" y1="130" x2="580" y2="180" stroke="#c0392b" stroke-width="1.1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="596" y="158" text-anchor="start" class="dim-text" font-size="14">500</text>
+<line x1="0"   y1="130" x2="586" y2="130" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="3,2"/>
+<line x1="500" y1="180" x2="586" y2="180" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="3,2"/>
+<!-- 軒出（南・北） -->
+<line x1="0" y1="540" x2="-30" y2="540" stroke="#c0392b" stroke-width="1" marker-end="url(#sa)" marker-start="url(#sb)"/>
+<text x="-15" y="534" text-anchor="middle" class="dim-text" font-size="10">300</text>
+<text x="-15" y="548" text-anchor="middle" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="8">軒出</text>
+<line x1="-30" y1="430" x2="-30" y2="547" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<!-- 勾配記号 -->
+<polygon points="380,92 430,92 380,112" fill="none" stroke="#c0392b" stroke-width="1.2"/>
+<text x="390" y="90" class="dim-text" font-size="9">1</text>
+<text x="380" y="118" class="dim-text" font-size="9">10</text>
+<text x="440" y="100" fill="#c0392b" font-family="'Noto Sans JP',sans-serif" font-size="12">勾配 1/10（5.7°）</text>
+
+<!-- 部材ラベル（左側） -->
+<text x="-285" y="103" class="ldr-text" font-size="12">ポリカ波板 t8</text>
+<line x1="-30" y1="106" x2="-170" y2="103" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="118" class="ldr-text" font-size="12">野地板 t12（省略可）</text>
+<text x="-285" y="132" class="ldr-text" font-size="12">垂木 φ48.6×1500</text>
+<line x1="-30" y1="124" x2="-170" y2="130" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="147" class="ldr-text" font-size="12">南側軒桁 φ48.6</text>
+<line x1="-25" y1="130" x2="-170" y2="145" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="210" class="ldr-text" font-size="12">柱 φ48.6mm</text>
+<line x1="0"   y1="210" x2="-170" y2="210" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="280" class="ldr-text" font-size="12">横胴縁 φ48.6</text>
+<text x="-285" y="292" class="ldr-text" font-size="10">@800mm, @1600mm</text>
+<line x1="0"   y1="270" x2="-170" y2="278" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="350" class="ldr-text" font-size="12">ポリカ壁パネル</text>
+<line x1="0"   y1="345" x2="-170" y2="348" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="432" class="ldr-text" font-size="12">根太パイプ φ48.6</text>
+<line x1="0"   y1="430" x2="-170" y2="430" class="ldr-line" marker-end="url(#sl)"/>
+<text x="-285" y="455" class="ldr-text" font-size="12" fill="#4af0a0">スパイラル杭 900mm↓</text>
+<line x1="5"   y1="448" x2="-170" y2="452" class="ldr-line" stroke="#4af0a0" marker-end="url(#sl)"/>
+<!-- 右側 -->
+<text x="672" y="172" class="ldr-text" font-size="12">北側軒桁 φ48.6</text>
+<line x1="535" y1="183" x2="670" y2="172" class="ldr-line" marker-end="url(#sl)"/>
+<text x="672" y="250" class="ldr-text" font-size="12">筋交い（ブレース）</text>
+<text x="672" y="262" class="ldr-text" font-size="10">各面2本　農研機構推奨</text>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">単管パイプ農作業小屋 設計図</div>
+  <div class="fc">図面番号: TP-SD-002</div>
+  <div class="fc">側面図（西面）　縮尺 1:50　単位 mm</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 3 / 5</div>
+</div>
+</div></div></div>
+
+<!-- ================================================================ -->
+<!-- PAGE 4: 平面図                                                     -->
+<!-- ================================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>平面図（GL + 1,200）</h2>
+    <div class="en">FLOOR PLAN — LEVEL GL+1200  |  縮尺 1:50  ·  単位 mm</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">TP-SD-003</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">1:50</div></div>
+    <div class="mc"><div class="ml">全幅</div><div class="mv">6,000 mm</div></div>
+    <div class="mc"><div class="ml">全奥行</div><div class="mv">5,000 mm</div></div>
+    <div class="mc"><div class="ml">建築面積</div><div class="mv">30.0 ㎡</div></div>
+    <div class="mc"><div class="ml">柱本数</div><div class="mv">12本</div></div>
+    <div class="mc"><div class="ml">柱ピッチ</div><div class="mv">X:1500 / Y:2500</div></div>
+    <div class="mc"><div class="ml">基礎</div><div class="mv">スパイラル杭 15本</div></div>
+  </div>
+</div>
+
+<div class="drawing-area">
+<svg viewBox="-240 -130 1260 900" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g3" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0L0,0 0,30" fill="none" stroke="#e8e0d0" stroke-width="0.4"/></pattern>
+  <marker id="pa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#c0392b"/></marker>
+  <marker id="pb" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0L0,4L8,8Z" fill="#c0392b"/></marker>
+  <marker id="pl" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0L6,3L0,6Z" fill="#1a5f8a"/></marker>
+</defs>
+<rect x="-30" y="-30" width="720" height="560" fill="url(#g3)"/>
+
+<!-- 軸線 X方向 -->
+<line x1="5"   y1="-110" x2="5"   y2="545" class="axis-line"/>
+<line x1="155" y1="-110" x2="155" y2="545" class="axis-line"/>
+<line x1="305" y1="-110" x2="305" y2="545" class="axis-line"/>
+<line x1="455" y1="-110" x2="455" y2="545" class="axis-line"/>
+<line x1="605" y1="-110" x2="605" y2="545" class="axis-line"/>
+<!-- 軸線 Y方向 -->
+<line x1="-30" y1="5"   x2="700" y2="5"   class="axis-line"/>
+<line x1="-30" y1="255" x2="700" y2="255" class="axis-line"/>
+<line x1="-30" y1="505" x2="700" y2="505" class="axis-line"/>
+<!-- 軸番号 X -->
+<circle cx="5"   cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="5"   y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X1</text>
+<circle cx="155" cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="155" y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X2</text>
+<circle cx="305" cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="305" y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X3</text>
+<circle cx="455" cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="455" y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X4</text>
+<circle cx="605" cy="-110" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="605" y="-106" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">X5</text>
+<!-- 軸番号 Y -->
+<circle cx="-200" cy="5"   r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="-200" y="9"   text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y1</text>
+<circle cx="-200" cy="255" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="-200" y="259" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y2</text>
+<circle cx="-200" cy="505" r="13" fill="white" stroke="#888" stroke-width="0.9"/><text x="-200" y="509" text-anchor="middle" font-size="10" fill="#555" font-family="'Share Tech Mono',monospace">Y3</text>
+<text x="-200" y="-22" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">南(S)</text>
+<text x="-200" y="530" text-anchor="middle" font-size="11" fill="#555" font-family="'Noto Sans JP',sans-serif">北(N)</text>
+
+<!-- 屋根投影（点線） -->
+<rect x="-30" y="-30" width="720" height="560" fill="rgba(170,220,195,0.07)" stroke="#3a8060" stroke-width="1" stroke-dasharray="10,5"/>
+
+<!-- 壁（切断面として太く）-->
+<rect x="0"   y="0"   width="660" height="12" fill="#7a7a80" stroke="#4a4a50" stroke-width="1.5"/>
+<rect x="0"   y="498" width="660" height="12" fill="#7a7a80" stroke="#4a4a50" stroke-width="1.5"/>
+<rect x="0"   y="0"   width="12"  height="510" fill="#7a7a80" stroke="#4a4a50" stroke-width="1.5"/>
+<rect x="648" y="0"   width="12"  height="510" fill="#7a7a80" stroke="#4a4a50" stroke-width="1.5"/>
+
+<!-- ドア開口（南面 X=210〜330） -->
+<rect x="210" y="0" width="120" height="12" fill="rgba(160,215,235,0.65)" stroke="#4a88b0" stroke-width="1.8"/>
+<line x1="210" y1="6"  x2="330" y2="6"  stroke="#4a88b0" stroke-width="2.2"/>
+<line x1="270" y1="0"  x2="270" y2="12" stroke="#4a88b0" stroke-width="1.2" stroke-dasharray="3,2"/>
+<!-- 開き方向 -->
+<line x1="210" y1="12" x2="210" y2="65" stroke="#4a88b0" stroke-width="1"/>
+<path d="M210,65 Q210,12 330,12" fill="none" stroke="#4a88b0" stroke-width="1" stroke-dasharray="4,2"/>
+
+<!-- 柱（全12本+妻面2本）φ48.6mm ≈ 5px正方形 -->
+<!-- 南列 -->
+<rect x="0"   y="0"   width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="149" y="0"   width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="299" y="0"   width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="449" y="0"   width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="599" y="0"   width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<!-- 北列 -->
+<rect x="0"   y="499" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="149" y="499" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="299" y="499" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="449" y="499" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="599" y="499" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<!-- 妻面中間柱 -->
+<rect x="0"   y="249" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+<rect x="649" y="249" width="11" height="11" class="pipe-col" stroke-width="1.3"/>
+
+<!-- スパイラル杭（点線円）全15本 -->
+<circle cx="5"   cy="5"   r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="155" cy="5"   r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="305" cy="5"   r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="455" cy="5"   r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="605" cy="5"   r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="5"   cy="505" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="155" cy="505" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="305" cy="505" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="455" cy="505" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="605" cy="505" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="5"   cy="255" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<circle cx="655" cy="255" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+<!-- 中間Y位置の杭 X=155,305,455,605 Y=255 -->
+<circle cx="155" cy="255" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+<circle cx="305" cy="255" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+<circle cx="455" cy="255" r="11" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+
+<!-- 根太パイプ（Y=0,255,505） -->
+<line x1="0" y1="255" x2="660" y2="255" stroke="#8a8a90" stroke-width="3" stroke-dasharray="8,4" opacity="0.6"/>
+<text x="330" y="251" text-anchor="middle" fill="#8a8a90" font-family="'Noto Sans JP',sans-serif" font-size="9">中間根太（Y=2,500）</text>
+
+<!-- 室内 -->
+<rect x="12" y="12" width="636" height="486" fill="rgba(255,252,245,0.35)"/>
+<text x="330" y="262" text-anchor="middle" fill="#aaa" font-family="'Noto Sans JP',sans-serif" font-size="18" opacity="0.4">作業スペース　30.0 ㎡</text>
+
+<!-- 垂木位置（屋根投影の内部に点線）-->
+<line x1="5"   y1="-20" x2="5"   y2="0"   stroke="#8a8a90" stroke-width="3" stroke-dasharray="4,3" opacity="0.5"/>
+<line x1="155" y1="-20" x2="155" y2="0"   stroke="#8a8a90" stroke-width="3" stroke-dasharray="4,3" opacity="0.5"/>
+<line x1="305" y1="-20" x2="305" y2="0"   stroke="#8a8a90" stroke-width="3" stroke-dasharray="4,3" opacity="0.5"/>
+<line x1="455" y1="-20" x2="455" y2="0"   stroke="#8a8a90" stroke-width="3" stroke-dasharray="4,3" opacity="0.5"/>
+<line x1="605" y1="-20" x2="605" y2="0"   stroke="#8a8a90" stroke-width="3" stroke-dasharray="4,3" opacity="0.5"/>
+
+<!-- 方位記号 -->
+<circle cx="890" cy="120" r="45" fill="none" stroke="#333" stroke-width="1.8"/>
+<polygon points="890,75 877,130 890,118 903,130" fill="#333"/>
+<polygon points="890,165 877,110 890,118 903,110" fill="white" stroke="#333" stroke-width="1.2"/>
+<text x="890" y="70" text-anchor="middle" font-size="16" font-weight="800" fill="#222">N</text>
+<text x="890" y="185" text-anchor="middle" font-size="13" fill="#555">S</text>
+<text x="845" y="123" text-anchor="middle" font-size="13" fill="#555">W</text>
+<text x="935" y="123" text-anchor="middle" font-size="13" fill="#555">E</text>
+<text x="890" y="56" text-anchor="middle" font-size="9" fill="#888">方位</text>
+
+<!-- 凡例 -->
+<rect x="810" y="220" width="200" height="220" fill="white" stroke="#bbb" stroke-width="1.2" rx="2"/>
+<text x="910" y="240" text-anchor="middle" fill="#333" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="700">[ 凡 例 ]</text>
+<line x1="818" y1="246" x2="1002" y2="246" stroke="#ddd" stroke-width="0.8"/>
+<rect x="822" y="255" width="12" height="12" class="pipe-col" stroke-width="1"/>
+<text x="840" y="265" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="11">柱 φ48.6mm</text>
+<rect x="822" y="272" width="35" height="8" fill="#7a7a80" stroke="#4a4a50" stroke-width="1"/>
+<text x="862" y="279" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="11">壁パネル</text>
+<rect x="822" y="289" width="28" height="12" fill="rgba(160,215,235,0.65)" stroke="#4a88b0" stroke-width="1"/>
+<text x="856" y="299" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="11">開口部</text>
+<circle cx="829" cy="316" r="10" fill="none" stroke="#4af0a0" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="845" y="320" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="11">スパイラル杭</text>
+<line x1="820" y1="335" x2="855" y2="335" stroke="#8a8a90" stroke-width="3" stroke-dasharray="8,4"/>
+<text x="862" y="339" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="11">中間根太</text>
+<rect x="820" y="350" width="35" height="14" fill="rgba(170,220,195,0.1)" stroke="#3a8060" stroke-width="0.8" stroke-dasharray="6,3"/>
+<text x="860" y="360" fill="#444" font-family="'Noto Sans JP',sans-serif" font-size="11">屋根投影</text>
+<text x="910" y="428" text-anchor="middle" fill="#999" font-family="'Share Tech Mono',monospace" font-size="10">SCALE 1:50</text>
+
+<!-- ====== 寸法線 ====== -->
+<!-- 全幅 X方向 -->
+<line x1="0" y1="-65" x2="660" y2="-65" stroke="#c0392b" stroke-width="1.3" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="330" y="-70" text-anchor="middle" class="dim-text" font-size="17">6,000</text>
+<line x1="0"   y1="-5"  x2="0"   y2="-72" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="660" y1="-5"  x2="660" y2="-72" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<!-- 柱ピッチ X -->
+<line x1="0"   y1="-38" x2="150" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="75"   y="-43" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="150" y1="-38" x2="300" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="225"  y="-43" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="300" y1="-38" x2="450" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="375"  y="-43" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="450" y1="-38" x2="600" y2="-38" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="525"  y="-43" text-anchor="middle" class="dim-text" font-size="11">1,500</text>
+<line x1="0"   y1="-5" x2="0"   y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="150" y1="-5" x2="150" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="300" y1="-5" x2="300" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="450" y1="-5" x2="450" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<line x1="600" y1="-5" x2="600" y2="-44" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<!-- 全奥行 Y方向 -->
+<line x1="750" y1="0" x2="750" y2="510" stroke="#c0392b" stroke-width="1.3" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="768" y="258" text-anchor="start" class="dim-text" font-size="17">5,000</text>
+<line x1="660" y1="0"   x2="756" y2="0"   stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="660" y1="510" x2="756" y2="510" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="3,2"/>
+<!-- Y=2500 -->
+<line x1="720" y1="0" x2="720" y2="255" stroke="#c0392b" stroke-width="1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="736" y="130" text-anchor="start" class="dim-text" font-size="12">2,500</text>
+<line x1="660" y1="255" x2="726" y2="255" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="2,2"/>
+<!-- ドア幅 -->
+<line x1="210" y1="-90" x2="330" y2="-90" stroke="#c0392b" stroke-width="1.1" marker-end="url(#pa)" marker-start="url(#pb)"/>
+<text x="270" y="-95" text-anchor="middle" class="dim-text" font-size="11">1,200（ドア）</text>
+<line x1="210" y1="-5"  x2="210" y2="-97" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="330" y1="-5"  x2="330" y2="-97" stroke="#c0392b" stroke-width="0.6" stroke-dasharray="3,2"/>
+</svg>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">単管パイプ農作業小屋 設計図</div>
+  <div class="fc">図面番号: TP-SD-003</div>
+  <div class="fc">平面図（GL+1,200）　縮尺 1:50　単位 mm</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 4 / 5</div>
+</div>
+</div></div></div>
+
+<!-- ================================================================ -->
+<!-- PAGE 5: 部材表・仕様表・施工メモ                                    -->
+<!-- ================================================================ -->
+<div class="page">
+<div class="frame-outer"><div class="frame-inner">
+<div class="title-bar">
+  <div class="title-main">
+    <h2>部材表・仕様表・施工メモ</h2>
+    <div class="en">MEMBER SCHEDULE / BUILDING SUMMARY / CONSTRUCTION NOTES</div>
+  </div>
+  <div class="title-meta">
+    <div class="mc"><div class="ml">図面番号</div><div class="mv">TP-SD-004</div></div>
+    <div class="mc"><div class="ml">縮尺</div><div class="mv">N.T.S.</div></div>
+    <div class="mc"><div class="ml">概算工費</div><div class="mv">¥237,100〜</div></div>
+    <div class="mc"><div class="ml">施工方法</div><div class="mv">1人DIY施工可</div></div>
+    <div class="mc"><div class="ml">参考規格</div><div class="mv">農研機構マニュアル</div></div>
+    <div class="mc"><div class="ml">パイプ規格</div><div class="mv">JIS A 8951</div></div>
+    <div class="mc"><div class="mv" style="font-size:0.64rem;color:#a00;">七花ファーム（ナナカファーム）　熊本県</div></div>
+    <div class="mc"><div class="mv" style="font-size:0.64rem;color:#888;">2026年3月</div></div>
+  </div>
+</div>
+
+<div style="flex:1;display:flex;overflow:hidden;">
+  <!-- 左カラム -->
+  <div style="flex:1;padding:14px 18px;border-right:1.5px solid var(--ink);overflow:auto;">
+
+    <div class="spec-section-title">◆ 主要部材一覧　MEMBER SCHEDULE</div>
+    <table>
+      <thead>
+        <tr><th>カテゴリ</th><th>品名</th><th>規格</th><th>数量</th><th>概算(円)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="cat-tag cat-f">基礎</span></td><td>スパイラル杭</td><td>φ48.6mm × 900mm</td><td>14〜15本</td><td class="cost">54,000</td></tr>
+        <tr><td><span class="cat-tag cat-f">基礎</span></td><td>沈下防止板</td><td>200×200mm 鋼板</td><td>4枚</td><td class="cost">2,800</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>足場用単管パイプ（主柱・桁）</td><td>φ48.6mm×6m t2.4mm</td><td>30本</td><td class="cost">60,000</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>横垂木（桟）パイプ</td><td>φ31.8mm×5.5m</td><td>12本</td><td class="cost">16,600</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>直交クランプ</td><td>φ48.6mm兼用</td><td>60個</td><td class="cost">9,300</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>自在クランプ（筋交い用）</td><td>φ48.6mm兼用</td><td>20個</td><td class="cost">3,100</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>鋼板製十字金具（スーパークロス）</td><td>48.6×48.6mm</td><td>40個</td><td class="cost">9,200</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>継手パイプ（鞘管）</td><td>φ42.7mm×300mm</td><td>10本</td><td class="cost">2,500</td></tr>
+        <tr><td><span class="cat-tag cat-s">構造</span></td><td>金属製キャップ</td><td>φ48.6mm用</td><td>20個</td><td class="cost">3,400</td></tr>
+        <tr><td><span class="cat-tag cat-r">被覆</span></td><td>ポリカ波板（屋根・壁兼用）</td><td>W655mm×L1820mm</td><td>50枚</td><td class="cost">35,000</td></tr>
+        <tr><td><span class="cat-tag cat-r">被覆</span></td><td>波板ビス（ステンレス）</td><td>32mm</td><td>200本</td><td class="cost">1,800</td></tr>
+        <tr><td><span class="cat-tag cat-o">建具</span></td><td>ハウス用扉（両開き）</td><td>W1200×H2000mm</td><td>1式</td><td class="cost">32,000</td></tr>
+        <tr><td><span class="cat-tag cat-o">その他</span></td><td>ドリルビス・防草シート等</td><td>M5×16他</td><td>一式</td><td class="cost">7,400</td></tr>
+        <tr class="total-row"><td colspan="4" style="text-align:right;">TOTAL ESTIMATE（概算工費）</td><td class="cost">¥237,100〜</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-block">
+      <strong>※工具類（インパクトドライバー・電動ハンマー・レーザーレベル・高速切断機・3m脚立）は別途</strong><br>
+      ※ポリカ波板は農業POフィルムより耐久性・強度が高くDIY向き<br>
+      ※単管パイプはホームセンターまたは足場資材店で調達（1本@2,000〜2,500円 6m）<br>
+      ※鋼板製十字金具（スーパークロス）は農研機構マニュアル推奨品
+    </div>
+
+    <div class="spec-section-title" style="margin-top:16px;">◆ 建物概要　BUILDING SUMMARY</div>
+    <table>
+      <tbody>
+        <tr><td style="width:42%;font-weight:600;">建物用途</td><td>農機具収納・農作業小屋</td></tr>
+        <tr><td style="font-weight:600;">構造種別</td><td>単管パイプ軸組（φ48.6mm / JIS A 8951準拠）</td></tr>
+        <tr><td style="font-weight:600;">建築面積</td><td>30.00 ㎡（6,000 × 5,000 mm）</td></tr>
+        <tr><td style="font-weight:600;">南側軒高</td><td>3,000 mm（GL〜軒桁芯）</td></tr>
+        <tr><td style="font-weight:600;">北側軒高</td><td>2,500 mm（GL〜軒桁芯）</td></tr>
+        <tr><td style="font-weight:600;">屋根形状</td><td>片流れ（南高・北低）</td></tr>
+        <tr><td style="font-weight:600;">屋根勾配</td><td>1/10（5.7°）</td></tr>
+        <tr><td style="font-weight:600;">柱ピッチ</td><td>X方向 1,500mm / Y方向 2,500mm</td></tr>
+        <tr><td style="font-weight:600;">垂木ピッチ</td><td>X方向 1,500mm（φ48.6mm）</td></tr>
+        <tr><td style="font-weight:600;">横垂木ピッチ</td><td>@850mm（φ31.8mm）</td></tr>
+        <tr><td style="font-weight:600;">軒出</td><td>300 mm（四方）</td></tr>
+        <tr><td style="font-weight:600;">基礎形式</td><td>スパイラル杭（φ48.6mm 地中900mm埋設）</td></tr>
+        <tr><td style="font-weight:600;">外壁・屋根材</td><td>ポリカ波板 t8mm（半透明）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 右カラム -->
+  <div style="flex:1;padding:14px 18px;">
+
+    <div class="spec-section-title">◆ 施工メモ（UNIT 01〜07）　CONSTRUCTION NOTES</div>
+    <ul class="step-list">
+      <li class="step-item">
+        <span class="step-num">UNIT<br>01</span>
+        <div>
+          <div class="step-title">位置決め・地縄張り</div>
+          <div class="step-note">巻尺・レーザー墨出しで直角確認（3:4:5の法則）。スパイラル杭打設位置にマーキング。X方向1500mmピッチ×5列、Y方向2500mmピッチ×3列 = 15点。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <span class="step-num">UNIT<br>02</span>
+        <div>
+          <div class="step-title">スパイラル杭打ち</div>
+          <div class="step-note">電動ハンマー＋単管アダプターで1人OK。水準器で鉛直確認。地中900mm埋設。隅4本に沈下防止板（200×200mm）を設置し、めり込みを防止。（農研機構マニュアル §2.1準拠）</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <span class="step-num">UNIT<br>03</span>
+        <div>
+          <div class="step-title">根太パイプ取り付け（GL基準）</div>
+          <div class="step-note">杭頭を直交クランプで連結し根太フレームを構成。X方向3本（Y=0, 2500, 5000）＋Y方向2本（X=0, 6000）。水平器で慎重に確認（全体の基準になる最重要工程）。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <span class="step-num">UNIT<br>04</span>
+        <div>
+          <div class="step-title">柱・軒桁の組み立て</div>
+          <div class="step-note">南側柱5本（H=3000mm）＋北側柱5本（H=2500mm）＋妻面中間柱2本。仮控えで鉛直保持しながら直交クランプで軒桁（南φ48.6 H=3000・北φ48.6 H=2500）を固定。筋交い（ブレース）を各面2本ずつ配置し剛性を確保。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <span class="step-num">UNIT<br>05</span>
+        <div>
+          <div class="step-title">垂木・横垂木（桟）取り付け</div>
+          <div class="step-note">φ48.6mm垂木5本（軒出300mm込み、傾斜5.7°）を軒桁に直交クランプで固定。次にφ31.8mm横垂木を@850mm間隔で7本配置（農研機構推奨の鋼板製十字金具で固定）。ポリカ波板の下地になる。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <span class="step-num">UNIT<br>06</span>
+        <div>
+          <div class="step-title">ポリカ波板の張り付け（屋根・壁）</div>
+          <div class="step-note">棟側（南側・高い方）から軒側（北側）へ。重ね幅1.5山以上（約75mm）。ステンレスビス（32mm）でφ31.8mm横垂木に固定。壁面も同様に横胴縁（@800・@1600）に固定。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <span class="step-num">UNIT<br>07</span>
+        <div>
+          <div class="step-title">ドア取り付け・仕上げ</div>
+          <div class="step-note">南面中央（X=2100〜3300）に市販ハウス用両開き扉セット（W1200×H2000mm、φ48.6mm用U字ボルト指定）を設置。金属キャップを全パイプ開口端に装着。防草シート敷設で完成。</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="note-block" style="margin-top:12px;">
+      <strong>農研機構マニュアル（建設足場資材利用園芸ハウスの施工マニュアル 2017年）準拠ポイント：</strong><br>
+      ・スパイラル杭工法：電動ハンマー打ち込み、1人施工可能<br>
+      ・主要接合：直交クランプ + 鋼板製十字金具（スーパークロス48.6×48.6）<br>
+      ・筋交い（ブレース）：各面2本、自在クランプ接続、強風・積雪対策必須<br>
+      ・横垂木ピッチ：@950mm推奨（本設計では@850mmで安全側に設定）
+    </div>
+
+    <div class="note-block" style="background:rgba(77,150,220,0.06);border-left-color:#2a6da0;">
+      <strong style="color:#2a6da0;">📐 木造軸組との比較（ナナカファーム設計済み版との違い）：</strong><br>
+      単管パイプ版：概算¥237,100〜 / 1人DIY施工可 / 解体・移設容易<br>
+      木造軸組版：概算¥500,000〜 / 高耐久（15〜30年） / 施設共済加入しやすい<br>
+      ▶ 目標：将来的に木造に移行、単管版は当面の農作業スペース確保用として活用
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fc">七花ファーム（ナナカファーム）　熊本県</div>
+  <div class="fc">単管パイプ農作業小屋 設計図</div>
+  <div class="fc">図面番号: TP-SD-004</div>
+  <div class="fc">部材表・仕様表・施工メモ（UNIT 01〜07）</div>
+  <div class="fc" style="margin-left:auto;border-right:none;">PAGE 5 / 5</div>
+</div>
+</div></div></div>
+
+</body>
+</html>
