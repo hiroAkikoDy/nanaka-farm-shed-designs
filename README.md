@@ -1,270 +1,168 @@
-# Claude Code学習プロジェクト - KAOS/Alloy形式手法アプローチ
+# 🏡 nanaka-farm-shed-designs
 
-**作成者**: 古閑弘晃  
-**作成日**: 2026年1月26日  
-**目的**: 形式手法（KAOS/Alloy）を活用して、Claude Codeを体系的に習得し、本業（農業）の生産性をデータ駆動型で向上させる
+**ナナカファーム 農作業小屋 設計図 & 3Dモデル**
 
----
+[![Zenn記事](https://img.shields.io/badge/Zenn-記事を読む-3EA8FF?logo=zenn&logoColor=white)](https://zenn.dev/hiroakikody/articles/47ba166f4dad26)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hiroakikody/nanaka-farm-shed-designs/blob/main/colab/view_models_open3d.ipynb)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 📚 プロジェクト概要
-
-このプロジェクトは、**ソクラテス式問答**を通じて明確化されたゴール構造を、**KAOS（ゴール志向分析）**と**Alloy（形式記法）**で形式化し、**Claude Code学習**に活かすものです。
-
-### 🎯 ルートゴール
-**「Claude Codeを使って、本業（農業）の生産性をデータ駆動型で向上させる」**
-
-### 🌟 プロジェクトの特徴
-1. **形式手法による曖昧性の排除**
-   - KAOSでゴール構造を可視化
-   - Alloyで論理的整合性を検証
-   - AIへの指示精度を向上
-
-2. **段階的・検証可能な学習**
-   - 各フェーズの達成条件を形式的に定義
-   - Alloy Analyzerで進捗を検証可能
-
-3. **実業務への直接適用**
-   - 農作業記録の自動化
-   - デジタル三河屋（顧客関係構築）
-   - データ駆動型意思決定
+> 「言葉で動くCAD」— **Claude × Blender MCP** で農作業小屋の設計図を1日で4種類作った話
 
 ---
 
-## 📁 ファイル構成
+## 📐 設計図・モデル一覧
 
-```
-claude_code_learning/
-├── README.md                          # このファイル
-├── kaos_claude_code_learning.png      # KAOSゴール図（NetworkX生成）
-├── kaos_goal_diagram.py               # KAOS図生成Pythonスクリプト
-├── kaos_claude_code_learning.graphml  # GraphML形式（yEd等で編集可能）
-├── claude_code_learning_kaos.als      # Alloy形式記法モデル
-├── ALLOY_MODEL_GUIDE.md              # Alloyモデル解説書
-└── CLAUDE_CODE_LEARNING_ROADMAP.md   # 詳細学習ロードマップ
-```
+| # | 種別 | サイズ | 構造 | Blender | PLY |
+|---|------|--------|------|---------|-----|
+| ① | 単管パイプ小屋（本番） | 6,000×5,000mm（30㎡） | φ48.6mm 単管 | [.blend](blender/tankan_shed_30sqm.blend) | [.ply](blender/tankan_shed_30sqm.ply) |
+| ② | 単管パイプ小屋（練習版） | 1,820×2,730mm（約3畳） | φ48.6mm 単管 | [.blend](blender/tankan_shed_mini_3jo.blend) | [.ply](blender/tankan_shed_mini_3jo.ply) |
+| ③ | 木造農作業小屋（本番） | 6,000×5,000mm（30㎡） | 木造軸組 105角柱 | [.blend](blender/wood_shed_30sqm.blend) | [.ply](blender/wood_shed_30sqm.ply) |
+| ④ | 木造農作業小屋（練習版） | 1,820×2,730mm（約3畳） | 木造軸組 105角柱 | [.blend](blender/wood_shed_mini_3jo.blend) | [.ply](blender/wood_shed_mini_3jo.ply) |
 
 ---
 
-## 🚀 クイックスタート
+## 🔄 Google Colab でぐりぐり触れます
 
-### 1. KAOS図の確認
-`kaos_claude_code_learning.png` を開いて、ゴール構造を把握
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hiroakikody/nanaka-farm-shed-designs/blob/main/colab/view_models_open3d.ipynb)
 
-**ゴール階層**:
-```
-ROOT: Claude Codeで生産性向上
-├─ G1: 正確な指示ができる【最優先】
-│  ├─ G11: KAOS/Alloyで要件形式化
-│  ├─ G12: 形式要件をプロンプトに変換
-│  └─ G13: Claude Codeワークフロー習得
-│     ├─ G131: 探索フェーズ
-│     ├─ G132: 計画フェーズ
-│     ├─ G133: 実装フェーズ
-│     └─ G134: コミットフェーズ
-├─ G2: データが継続的に蓄積される【優先度1】
-│  ├─ G21: 入力項目最適化
-│  ├─ G22: 入力リマインダー
-│  └─ G23: MCP経由でNeo4j操作
-└─ G3: 顧客との関係を構築【優先度2】
-   ├─ G31: 顧客データ管理
-   ├─ G32: パーソナライズ提案
-   └─ G33: GNNサジェスト（将来）
-```
+**`Runtime → Run all`** を押すだけで全4モデルが表示されます。インストール不要。
 
-### 2. Alloyモデルの検証
-
-#### インストール（macOS）
-```bash
-brew install --cask alloy
-```
-
-#### モデルを開く
-1. Alloy Analyzerを起動
-2. `claude_code_learning_kaos.als` を開く
-
-#### 検証実行
-```
-Execute → Check NoCycles              # 循環依存の検証
-Execute → Check RootRequiresG1andG2   # ルートゴール達成条件
-Execute → Run Phase1_Complete         # フェーズ1完了シナリオ
-Execute → Run G1_Achieved             # 最優先ゴール達成
-```
-
-### 3. 学習ロードマップの確認
-`CLAUDE_CODE_LEARNING_ROADMAP.md` を読んで、具体的な学習計画を把握
-
----
-
-## 🎓 学習フェーズ
-
-### フェーズ0: 準備（1週間）
-- Alloy Analyzerセットアップ
-- Notionデータベース構築
-- 技術書1-2章読了
-
-### フェーズ1: 基礎固め（2-3週間）
-- Claude Codeベストプラクティス習得
-- ワークフロー（探索→計画→実装→コミット）
-- プロジェクト: TODOアプリ
-
-### フェーズ2: 形式手法統合（2-3週間）
-- KAOS→Alloy→プロンプトのパイプライン確立
-- プロジェクト: 農作業記録入力支援ツール
-
-### フェーズ3: MCP実践（3-4週間）
-- Neo4j/Notion MCP統合
-- データ蓄積の自動化
-- プロジェクト: 農作業管理システム拡張
-
-### フェーズ4: デジタル三河屋（継続的）
-- 顧客データ管理
-- パーソナライズ提案
-- 将来的にGNN活用
-
----
-
-## 🔍 ドキュメント詳細
-
-### 1. KAOS図（PNG + GraphML）
-**目的**: ゴール構造の可視化
-
-**活用方法**:
-- NetworkX生成PNG: 全体俯瞰
-- GraphML: yEd, Gephi等で編集・カスタマイズ
-- プレゼン資料、ブログ記事への活用
-
-### 2. Alloyモデル（`.als`）
-**目的**: ゴール構造の形式的検証
-
-**主要要素**:
-- **Signature**: Goal, RefinementType (AND/OR), Priority, Status
-- **Facts**: 非循環性、ANDゲート、ORゲートの制約
-- **Predicates**: 各フェーズ完了条件
-- **Assertions**: ルートゴール達成条件、優先度整合性
-
-**活用方法**:
-- ゴール追加時の整合性チェック
-- 達成条件の明確化
-- 学習計画の妥当性検証
-
-### 3. Alloyモデル解説（`.md`）
-**目的**: Alloyモデルの理解と活用ガイド
-
-**内容**:
-- シグネチャ定義の意味
-- 制約条件の詳細解説
-- 検証シナリオの実行方法
-- Claude Codeとの統合方法
-
-### 4. 学習ロードマップ（`.md`）
-**目的**: 具体的な学習計画と進捗管理
-
-**内容**:
-- フェーズ別詳細計画
-- 週次スケジュール例
-- Notionデータベース構造
-- 成功基準とマイルストーン
-
----
-
-## 💡 このアプローチの強み
-
-### 1. 曖昧性の排除
-**課題**: 「Claude Codeを使いこなす」は抽象的すぎる
-
-**解決**: 
-- KAOSでゴール分解
-- Alloyで達成条件を形式化
-- 測定可能な基準を設定
-
-### 2. 論理的整合性の保証
-**課題**: ゴール間の矛盾や循環参照
-
-**解決**:
-- Alloyで自動検証
-- ANDゲート/ORゲートの明確な定義
-- 依存関係の可視化
-
-### 3. AIへの指示精度向上
-**課題**: 自然言語の解釈のブレ
-
-**解決**:
-- 形式的に検証された要件
-- プロンプトへの変換パイプライン
-- 再現可能な開発プロセス
-
----
-
-## 🎯 期待される成果
-
-### 3ヶ月後
-- [ ] Claude Code基礎習得完了（G1達成）
-- [ ] 農作業記録の習慣化（G2達成）
-- [ ] ブログ投稿10本以上
-
-### 6ヶ月後
-- [ ] デジタル三河屋MVP稼働（G3部分達成）
-- [ ] 顧客10名以上獲得
-- [ ] データ駆動型農業経営の基盤確立
-
-### 1年後
-- [ ] ルートゴール達成
-- [ ] 本業生産性の測定可能な向上
-- [ ] KAOS/Alloy/Claude Codeの知見体系化
-
----
-
-## 📖 参考リソース
-
-### Claude Code
-- [Anthropic: Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
-- [技術評論社: Claude CodeによるAI駆動開発入門](https://gihyo.jp/book/2025/978-4-297-15275-8)
-
-### KAOS
-- "Goal-Oriented Requirements Engineering" (van Lamsweerde)
-- "Requirements Engineering" (Axel van Lamsweerde)
-
-### Alloy
-- [Software Abstractions (書籍)](https://mitpress.mit.edu/9780262528900/software-abstractions/)
-- [Alloy Documentation](https://alloytools.org/documentation.html)
-
----
-
-## 🔄 更新履歴
-
-| 日付 | 内容 |
+| 操作 | 動作 |
 |------|------|
-| 2026-01-26 | プロジェクト開始、KAOS図・Alloyモデル・ロードマップ作成 |
-| 2026-02-09 | フェーズ0完了予定 |
-| 2026-02-23 | フェーズ1完了予定 |
+| 🖱️ 左ドラッグ | 回転（上下左右から確認） |
+| 🖱️ 右ドラッグ | 平行移動 |
+| 🖱️ スクロール | ズームイン／アウト |
+| 🏠 ホームボタン | 視点リセット |
+
+**技術構成：** Open3D で `.ply` を読み込み → Plotly `Mesh3d` でインタラクティブ表示（EGL/GPU不要・ColabのCPUランタイムで動作）
 
 ---
 
-## 📝 次のアクション
+## 🗂️ リポジトリ構成
 
-### 今週（1/27-2/2）
-- [ ] Alloy Analyzerインストール
-- [ ] Alloyモデルの検証実行
-- [ ] Notionデータベース構築
-- [ ] ブログ記事1本執筆開始
-
-### 来週（2/3-2/9）
-- [ ] 技術評論社『Claude Code入門』3章
-- [ ] TODOアプリのKAOS図作成
-- [ ] ブログ記事1本公開
-
----
-
-## 🤝 フィードバック
-
-このプロジェクトは継続的に改善されます。
-
-**フィードバック歓迎**:
-- GitHub Issues（リポジトリ作成後）
-- ブログコメント
-- Zennスクラップ
+```
+nanaka-farm-shed-designs/
+├── blender/
+│   ├── tankan_shed_30sqm.blend      # 単管パイプ小屋（本番 30㎡）
+│   ├── tankan_shed_30sqm.ply
+│   ├── tankan_shed_mini_3jo.blend   # 単管パイプ小屋（練習版 約3畳）
+│   ├── tankan_shed_mini_3jo.ply
+│   ├── wood_shed_30sqm.blend        # 木造農作業小屋（本番 30㎡）
+│   ├── wood_shed_30sqm.ply
+│   ├── wood_shed_mini_3jo.blend     # 木造農作業小屋（練習版 約3畳）
+│   └── wood_shed_mini_3jo.ply
+└── colab/
+    └── view_models_open3d.ipynb     # Plotly インタラクティブビューア
+```
 
 ---
 
-**最終更新**: 2026年1月26日  
-**次回レビュー**: 2026年2月9日（フェーズ0終了時）
+## 🏗️ 設計仕様
+
+### 単管パイプ版（本番 30㎡）
+
+| 項目 | 仕様 |
+|------|------|
+| 外寸 | 6,000 × 5,000 mm |
+| 南側軒高 | 3,000 mm |
+| 北側軒高 | 2,500 mm |
+| 屋根 | 片流れ 1/10勾配（5.7°）ポリカ波板 t8 |
+| 主管 | φ48.6mm t2.4mm（JIS A 8951準拠） |
+| 柱ピッチ | X方向 1,500mm × Y方向 2,500mm |
+| 基礎 | スパイラル杭 φ48.6mm 地中900mm × 15本 |
+| 建具 | 両開きドア W1,200 × H2,000mm |
+| 概算費用 | ¥237,100〜 |
+
+### 木造版（本番 30㎡）
+
+| 項目 | 仕様 |
+|------|------|
+| 外寸 | 6,000 × 5,000 mm |
+| 南側軒高 | 3,000 mm |
+| 北側軒高 | 2,500 mm |
+| 屋根 | 片流れ 1/10勾配（5.7°）ポリカ波板 t8 |
+| 柱 | 105 × 105mm @1,500mmピッチ |
+| 軒桁 | 105 × 150mm |
+| 垂木 | 45 × 105mm @1,000mm |
+| 基礎 | 束石 200 × 200 × 150mm |
+| 建具 | 引き戸 W1,800 × H2,100mm |
+
+> 農研機構「建設足場資材利用園芸ハウスの施工マニュアル」（2017年）準拠
+
+---
+
+## 🔧 技術スタック
+
+```
+Claude Desktop（claude-sonnet-4系）
+    ↓ MCP（Model Context Protocol）port 9876
+Blender 4.x + blender-mcp アドオン
+    ↓ Blender Python API（bpy）で自動生成
+.blend ファイル → .ply エクスポート
+    ↓
+GitHub リポジトリ公開
+    ↓
+Google Colab（Open3D + Plotly）でブラウザ上インタラクティブ表示
+```
+
+### Blenderモデリングの工夫
+
+- **`transform_apply` 不使用パターン** — スケールをそのまま残すことでワールド座標のずれを防止
+- **2点間接続法（`pipe_between`関数）** — `rotation_difference()` で任意方向の単管パイプを正確配置
+- **傾斜角の符号管理** — `rotation_euler[0] = -slope` で南高・北低の片流れ屋根を正確に表現
+
+### Colab表示の工夫
+
+- **Open3D `OffscreenRenderer` は使わない** — ColabのCPU環境ではEGLエラーでカーネルがクラッシュする
+- **Plotly `Mesh3d`** — GPU不要、Colabセル内でマウス操作可能
+
+---
+
+## 🚀 使い方
+
+### Colabでモデルを触る（推奨）
+
+[Open In Colab](https://colab.research.google.com/github/hiroakikody/nanaka-farm-shed-designs/blob/main/colab/view_models_open3d.ipynb) を開いて `Runtime → Run all`
+
+### Blenderファイルをローカルで開く
+
+```bash
+git clone https://github.com/hiroakikody/nanaka-farm-shed-designs.git
+```
+
+`blender/` フォルダの `.blend` ファイルを Blender 4.x で開く。
+
+### ローカルでOpen3Dインタラクティブ表示
+
+```bash
+pip install open3d plotly jupyter
+jupyter notebook colab/view_models_open3d.ipynb
+```
+
+CELL 9 の `draw_interactive('tankan_mini')` でウィンドウが開き、マウスでぐりぐり操作できます。
+
+---
+
+## 📚 参考資料
+
+- [農研機構「建設足場資材利用園芸ハウスの施工マニュアル」(2017)](https://www.naro.go.jp/publicity_report/publication/files/warc_man_hausupanfu20170314a_2.pdf)
+- 学研ムック DIYシリーズ「屋根付きウッドデッキの作り方」（Gakken、2014）
+- [blender-mcp](https://github.com/ahujasid/blender-mcp)
+
+---
+
+## ✍️ 関連記事
+
+- **Zenn**: [AI × Blender MCP で農作業小屋の設計図を1日で4種類作った話](https://zenn.dev/hiroakikody/articles/47ba166f4dad26)
+- **Zenn**: [@hiroakikody の記事一覧](https://zenn.dev/hiroakikody)
+
+---
+
+## 📄 ライセンス
+
+MIT License — 設計図・コード・3Dモデルは自由に改変・利用・再配布可能です。  
+実際の建設時は構造安全性を専門家に確認することを推奨します。
+
+---
+
+*七花ファーム（ナナカファーム）　熊本県 / 古閑 弘晃（hiroakiKody）*
